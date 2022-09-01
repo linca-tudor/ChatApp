@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Input, Button } from "react-native-elements";
 import getStyles from "./SignInScreen.styles";
 
-const SignInScreen = ({ signIn, contaierStyle }) => {
+const SignInScreen = ({ signIn }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState("");
