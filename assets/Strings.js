@@ -1,7 +1,8 @@
 const Strings = {
   welcome: {
-    title: "Welcome title",
-    subTitle: "Welcome screen subtitle should be a nice phrase",
+    title: 'Say "hello" to a different messaging experience',
+    subTitle:
+      " An unexpected focus on privacy, combined with all of the features you expect",
   },
 };
 

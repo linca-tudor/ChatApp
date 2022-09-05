@@ -1,27 +1,29 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React from 'react';
+import { StyleSheet, StatusBar } from 'react-native';
+import Colors from '../../../assets/Colors';
 
 const getStyles = () => {
   return StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: 20,
-        paddingHorizontal: 20,
-        backgroundColor: "#fff",
-      },
-    controls: {
+    flex: {
       flex: 1,
     },
-
+    container: {
+      paddingHorizontal: 20,
+      backgroundColor: Colors.lavenderMist,
+    },
     control: {
       marginTop: 10,
+      backgroundColor: Colors.watermelon,
     },
-
+    inputField: {
+      marginTop: 10,
+      backgroundColor: Colors.lavenderMist,
+    },
     error: {
       marginTop: 10,
       padding: 10,
-      color: "#fff",
-      backgroundColor: "#D54826FF",
+      color: '#fff',
+      backgroundColor: '#D54826FF',
     },
   });
 };

@@ -17,18 +17,13 @@ export default function AuthStack() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerShown: true,
+          headerShown: false,
           headerMode: "float",
           headerBackTitleVisible: true,
           headerTitle: "",
-          headerStyleInterpolator: HeaderStyleInterpolators.forFade,
         }}
       >
-        <Stack.Screen
-          name="Welcome"
-          component={WelcomeScreenContainer}
-          options={{ headerShown: false }}
-        />
+        <Stack.Screen name="Welcome" component={WelcomeScreenContainer} />
         <Stack.Screen name="Sign In" component={SignInScreenContainer} />
         <Stack.Screen name="Sign Up" component={SignUpScreenContainer} />
       </Stack.Navigator>

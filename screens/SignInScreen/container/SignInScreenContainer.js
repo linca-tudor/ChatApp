@@ -1,30 +1,27 @@
-import { React } from "react";
-import SignInScreen from "../screen";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from 'react';
+import SignInScreen from '../screen';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const SignInScreenContainer = () => {
+  const [error, setError] = useState();
   const auth = getAuth();
 
-  const signIn = async () => {
-    if (value.email === "" || value.password === "") {
-      setValue({
-        ...value,
-        error: "Email and password are mandatory.",
-      });
+  const signIn = async (email, password) => {
+    if (email === '' || password === '') {
+      setError('Please input both e-mail address and password');
       return;
     }
 
     try {
-      await signInWithEmailAndPassword(auth, value.email, value.password);
+      await signInWithEmailAndPassword(auth, email, password);
+      setError('');
     } catch (error) {
-      setValue({
-        ...value,
-        error: error.message,
-      });
+      setError(error.message);
     }
   };
 
-  return <SignInScreen signIn={signIn} />;
+  return <SignInScreen signIn={signIn} err={error} />;
 };
 
 export default SignInScreenContainer;
+
