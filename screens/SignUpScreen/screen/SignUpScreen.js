@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import TextInput from '../../../components/TextInput';
 import getStyles from './SignUpScreen.styles';
-import Button from '../../../components/Button';
 import Colors from '../../../assets/Colors';
 import Screen from '../../../components/Screen';
+import UserAuthForm from '../../../components/UserAuthForm';
 
 const SignUpScreen = ({
   signUp,
@@ -27,24 +25,19 @@ const SignUpScreen = ({
       <View style={[styles.flex, styles.container]}>
         {!!error && (
           <View style={styles.error}>
-            <Text>{error}</Text>
+            <Text style={styles.errorText}>{error}</Text>
           </View>
         )}
-        <TextInput
-          placeholder={'Email'}
-          secureText={false}
-          value={email}
-          onTextUpdate={(text) => setEmail(text)}
+        <UserAuthForm
+          email={email}
+          password={password}
+          onEmailUpdate={(text) => setEmail(text)}
+          onPasswordUpdate={(text) => setPassword(text)}
+          isUserRegistering={true}
+          onButtonPress={() => signUp(email, password)}
+          passwordHidden={passwordHidden}
+          passwordHiddenToggle={passwordHiddenToggle}
         />
-        <TextInput
-          placeholder={'Password'}
-          secureText={true}
-          isSecureTextHidden={passwordHidden}
-          value={password}
-          onTextUpdate={(text) => setPassword(text)}
-          onSecureTextToggle={passwordHiddenToggle}
-        />
-        <Button title={'Sign up'} onPress={() => signUp(email, password)} />
       </View>
     </Screen>
   );

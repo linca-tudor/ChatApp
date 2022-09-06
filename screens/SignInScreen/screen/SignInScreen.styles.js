@@ -8,21 +8,22 @@ const getStyles = () => {
       flex: 1,
     },
     container: {
+      justifyContent: 'flex-start',
       paddingHorizontal: 20,
       backgroundColor: Colors.lavenderMist,
     },
-    control: {
-      marginTop: 10,
-      backgroundColor: Colors.watermelon,
-    },
-    inputField: {
-      backgroundColor: Colors.lavenderMist,
-    },
     error: {
+      alignItems: 'center',
+      justifyContent: 'center',
       marginTop: 10,
       padding: 10,
-      color: '#fff',
-      backgroundColor: '#D54826FF',
+      backgroundColor: Colors.ferrariRed,
+      borderRadius: 12.5,
+    },
+    errorText: {
+      textAlign: 'center',
+      color: Colors.white,
+      fontSize: 15,
     },
   });
 };

@@ -10,16 +10,24 @@ const getStyles = () => {
     container: {
       justifyContent: 'flex-start',
       paddingHorizontal: 20,
-      backgroundColor: Colors.background,
+      backgroundColor: Colors.lavenderMist,
     },
     inputField: {
       backgroundColor: Colors.lavenderMist,
     },
     error: {
+      alignItems: 'center',
+      justifyContent: 'center',
       marginTop: 10,
       padding: 10,
-      color: '#fff',
-      backgroundColor: '#D54826FF',
+      color: Colors.white,
+      backgroundColor: Colors.ferrariRed,
+      borderRadius: 12.5,
+    },
+    errorText: {
+      textAlign: 'center',
+      color: Colors.white,
+      fontSize: 15,
     },
   });
 };
