@@ -4,7 +4,12 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const SignInScreenContainer = () => {
   const [error, setError] = useState();
+  const [passwordHidden, setPasswordHidden] = useState(true);
   const auth = getAuth();
+
+  const onSecureTextTogle = () => {
+    setPasswordHidden(!passwordHidden);
+  };
 
   const signIn = async (email, password) => {
     if (email === '' || password === '') {
@@ -20,8 +25,14 @@ const SignInScreenContainer = () => {
     }
   };
 
-  return <SignInScreen signIn={signIn} err={error} />;
+  return (
+    <SignInScreen
+      signIn={signIn}
+      err={error}
+      passwordHidden={passwordHidden}
+      passwordHiddenToggle={onSecureTextTogle}
+    />
+  );
 };
 
 export default SignInScreenContainer;
-

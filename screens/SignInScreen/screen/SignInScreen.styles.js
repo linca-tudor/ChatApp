@@ -16,7 +16,6 @@ const getStyles = () => {
       backgroundColor: Colors.watermelon,
     },
     inputField: {
-      marginTop: 10,
       backgroundColor: Colors.lavenderMist,
     },
     error: {

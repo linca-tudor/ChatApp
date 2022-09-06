@@ -4,7 +4,12 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const SignUpScreenContainer = ({ navigation }) => {
   const [error, setError] = useState();
+  const [passwordHidden, setPasswordHidden] = useState(true);
   const auth = getAuth();
+
+  const onSecureTextTogle = () => {
+    setPasswordHidden(!passwordHidden);
+  };
 
   async function signUp(email, password) {
     if (email === '' || password === '') {
@@ -22,7 +27,14 @@ const SignUpScreenContainer = ({ navigation }) => {
     }
   }
 
-  return <SignUpScreen signUp={signUp} err={error} />;
+  return (
+    <SignUpScreen
+      signUp={signUp}
+      err={error}
+      passwordHidden={passwordHidden}
+      passwordHiddenToggle={onSecureTextTogle}
+    />
+  );
 };
 
 export default SignUpScreenContainer;

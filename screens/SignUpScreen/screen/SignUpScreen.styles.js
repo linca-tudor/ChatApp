@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, StatusBar } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
 
 const getStyles = () => {
@@ -8,15 +8,11 @@ const getStyles = () => {
       flex: 1,
     },
     container: {
+      justifyContent: 'flex-start',
       paddingHorizontal: 20,
       backgroundColor: Colors.background,
     },
-    control: {
-      marginTop: 10,
-      backgroundColor: Colors.watermelon,
-    },
     inputField: {
-      marginTop: 10,
       backgroundColor: Colors.lavenderMist,
     },
     error: {
