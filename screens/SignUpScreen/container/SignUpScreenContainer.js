@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import SignUpScreen from '../screen';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import Strings from '../../../assets/Strings';
+import { useNavigation } from '@react-navigation/native';
 
 const SignUpScreenContainer = ({ navigation }) => {
   const [error, setError] = useState();
   const [passwordHidden, setPasswordHidden] = useState(true);
   const auth = getAuth();
+  const { navigate } = useNavigation();
 
   const onSecureTextTogle = () => {
     setPasswordHidden(!passwordHidden);
@@ -34,6 +36,7 @@ const SignUpScreenContainer = ({ navigation }) => {
       err={error}
       passwordHidden={passwordHidden}
       passwordHiddenToggle={onSecureTextTogle}
+      onBottomLinkPress={() => navigate('Sign In')}
     />
   );
 };

@@ -29,6 +29,21 @@ const getStyles = () => {
       color: Colors.white,
       fontSize: 15,
     },
+    alreadyRegisteredContainer: {
+      marginTop: 'auto',
+      marginBottom: 20,
+      flexDirection: 'row',
+      justifyContent: 'center',
+    },
+    alreadyRegisteredText: {
+      fontSize: 16,
+      marginRight: 5,
+    },
+    alreadyRegisteredRoute: {
+      fontSize: 16,
+      fontWeight: '600',
+      color: Colors.watermelon,
+    },
   });
 };
 

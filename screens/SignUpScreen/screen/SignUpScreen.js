@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import getStyles from './SignUpScreen.styles';
 import Colors from '../../../assets/Colors';
 import Strings from '../../../assets/Strings';
@@ -11,6 +11,7 @@ const SignUpScreen = ({
   err,
   passwordHidden,
   passwordHiddenToggle,
+  onBottomLinkPress,
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,6 +42,16 @@ const SignUpScreen = ({
           passwordHidden={passwordHidden}
           passwordHiddenToggle={passwordHiddenToggle}
         />
+        <View style={styles.alreadyRegisteredContainer}>
+          <Text style={styles.alreadyRegisteredText}>
+            {Strings.signUp.alreadyRegistered}
+          </Text>
+          <TouchableOpacity onPress={onBottomLinkPress}>
+            <Text style={styles.alreadyRegisteredRoute}>
+              {Strings.signUp.alreadyRegisteredRoute}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </Screen>
   );

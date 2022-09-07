@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import getStyles from './SignInScreen.styles';
 import Colors from '../../../assets/Colors';
 import Strings from '../../../assets/Strings';
@@ -12,6 +12,7 @@ const SignInScreen = ({
   err,
   passwordHidden,
   passwordHiddenToggle,
+  onBottomLinkPress,
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -43,6 +44,16 @@ const SignInScreen = ({
           passwordHiddenToggle={passwordHiddenToggle}
           recoverPassword={() => recoverPassword(email)}
         />
+        <View style={styles.notRegisteredContainer}>
+          <Text style={styles.notRegisteredText}>
+            {Strings.signIn.notRegistered}
+          </Text>
+          <TouchableOpacity onPress={onBottomLinkPress}>
+            <Text style={styles.notRegisteredRoute}>
+              {Strings.signIn.notRegisteredRoute}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </Screen>
   );
