@@ -9,13 +9,30 @@ const getStyles = () => {
       marginVertical: 60,
     },
     messageTitle: {
-      fontSize: 26,
+      fontSize: 30,
       textAlign: 'center',
       marginBottom: 20,
     },
     messageSubtitle: {
       fontSize: 18,
       textAlign: 'center',
+    },
+    textInputContainer: {
+      marginBottom: 10,
+    },
+    textInput: {
+      marginBottom: 10,
+    },
+    recoverPasswordContainer: {
+      marginBottom: 20,
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+    },
+    recoverPasswordText: {
+      fontSize: 16,
+    },
+    button: {
+      marginTop: 10,
     },
   });
 };

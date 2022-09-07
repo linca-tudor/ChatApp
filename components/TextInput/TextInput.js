@@ -11,11 +11,12 @@ const TextInput = ({
   onSecureTextToggle,
   value,
   onTextUpdate,
+  style,
 }) => {
   const styles = getStyles('');
 
   return (
-    <View style={styles.container}>
+    <View style={[style, styles.container]}>
       <RNTextInput
         placeholder={placeholder}
         value={value}

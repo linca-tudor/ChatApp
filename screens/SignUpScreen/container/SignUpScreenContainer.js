@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SignUpScreen from '../screen';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import Strings from '../../../assets/Strings';
 
 const SignUpScreenContainer = ({ navigation }) => {
   const [error, setError] = useState();
@@ -13,7 +14,7 @@ const SignUpScreenContainer = ({ navigation }) => {
 
   async function signUp(email, password) {
     if (email === '' || password === '') {
-      setError('Please input both e-mail address and password');
+      setError(Strings.signUp.emptyEmailPassErr);
       return;
     }
 

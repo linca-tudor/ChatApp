@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import getStyles from './SignInScreen.styles';
 import Colors from '../../../assets/Colors';
+import Strings from '../../../assets/Strings';
 import Screen from '../../../components/Screen';
-import Button from '../../../components/Button';
-import TextInput from '../../../components/TextInput';
 import UserAuthForm from '../../../components/UserAuthForm';
 
 const SignInScreen = ({
   signIn,
+  recoverPassword,
   err,
   passwordHidden,
   passwordHiddenToggle,
@@ -31,14 +31,17 @@ const SignInScreen = ({
           </View>
         )}
         <UserAuthForm
+          title={Strings.signIn.title}
+          subTitle={Strings.signIn.subTitle}
           email={email}
           password={password}
           onEmailUpdate={(text) => setEmail(text)}
           onPasswordUpdate={(text) => setPassword(text)}
-          isUserRegistering={true}
+          isUserRegistering={false}
           onButtonPress={() => signIn(email, password)}
           passwordHidden={passwordHidden}
           passwordHiddenToggle={passwordHiddenToggle}
+          recoverPassword={() => recoverPassword(email)}
         />
       </View>
     </Screen>

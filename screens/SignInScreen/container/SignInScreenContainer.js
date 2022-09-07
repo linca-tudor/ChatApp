@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import SignInScreen from '../screen';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from 'firebase/auth';
+import Strings from '../../../assets/Strings';
 
 const SignInScreenContainer = () => {
   const [error, setError] = useState();
@@ -13,7 +18,7 @@ const SignInScreenContainer = () => {
 
   const signIn = async (email, password) => {
     if (email === '' || password === '') {
-      setError('Please input both e-mail address and password');
+      setError(Strings.signIn.emptyEmailPassErr);
       return;
     }
 
@@ -25,9 +30,24 @@ const SignInScreenContainer = () => {
     }
   };
 
+  const recoverPassword = async (email) => {
+    if (email === '') {
+      setError(Strings.signIn.passEmptyEmailErr);
+      return;
+    }
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setError('');
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   return (
     <SignInScreen
       signIn={signIn}
+      recoverPassword={recoverPassword}
       err={error}
       passwordHidden={passwordHidden}
       passwordHiddenToggle={onSecureTextTogle}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
 import getStyles from './SignUpScreen.styles';
 import Colors from '../../../assets/Colors';
+import Strings from '../../../assets/Strings';
 import Screen from '../../../components/Screen';
 import UserAuthForm from '../../../components/UserAuthForm';
 
@@ -29,6 +30,8 @@ const SignUpScreen = ({
           </View>
         )}
         <UserAuthForm
+          title={Strings.signUp.title}
+          subTitle={Strings.signUp.subTitle}
           email={email}
           password={password}
           onEmailUpdate={(text) => setEmail(text)}
