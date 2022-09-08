@@ -7,9 +7,8 @@ const Strings = {
   signIn: {
     title: 'Hello Again!',
     subTitle: "Welcome back, you've been missed!",
+    buttonTitle: 'Sign In',
     recoverPassword: 'Recover Password',
-    passEmptyEmailErr:
-      'Please input the e-mail address to attempt password recovery',
     emptyEmailPassErr:
       'Please input both e-mail address and password to sign in',
     notRegistered: 'Not a member yet?',
@@ -18,11 +17,20 @@ const Strings = {
   signUp: {
     title: 'Welcome!',
     subTitle: 'Join our amazing community!',
+    buttonTitle: 'Sign Up',
     emptyEmailPassErr:
-      'Please input both e-mail address and password to register',
+      'Please input the e-mail address to attempt password recovery',
     alreadyRegistered: 'Already a member?',
     alreadyRegisteredRoute: 'Sign In',
   },
+  recoverPassword: {
+    title: 'Oops!',
+    subTitle: 'Type your account e-mail address to attempt password recovery',
+    buttonTitle: 'Send recovery e-mail',
+    emptyEmailErr:
+      'Please input the e-mail address to attempt password recovery',
+  },
+
 };
 
 export default Strings;

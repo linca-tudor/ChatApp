@@ -14,8 +14,10 @@ const SignInScreen = ({
   passwordHiddenToggle,
   onBottomLinkPress,
 }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('mail.tudorlinca+chatapp@gmail.com');
+  const [password, setPassword] = useState('123456789');
   const [error, setError] = useState('');
   const styles = getStyles();
 
@@ -35,14 +37,17 @@ const SignInScreen = ({
           title={Strings.signIn.title}
           subTitle={Strings.signIn.subTitle}
           email={email}
+          isEmailInputShown
           password={password}
+          isPasswordInputShown
           onEmailUpdate={(text) => setEmail(text)}
           onPasswordUpdate={(text) => setPassword(text)}
-          isUserRegistering={false}
+          isRecoverPasswordHidden={false}
           onButtonPress={() => signIn(email, password)}
           passwordHidden={passwordHidden}
           passwordHiddenToggle={passwordHiddenToggle}
           recoverPassword={() => recoverPassword(email)}
+          buttonTitle={Strings.signIn.buttonTitle}
         />
         <View style={styles.notRegisteredContainer}>
           <Text style={styles.notRegisteredText}>

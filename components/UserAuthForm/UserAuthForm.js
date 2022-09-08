@@ -10,13 +10,16 @@ const UserAuthForm = ({
   subTitle,
   email,
   password,
+  isEmailInputShown,
+  isPasswordInputShown,
   onEmailUpdate,
   onPasswordUpdate,
-  isUserRegistering,
+  isRecoverPassHidden,
   onButtonPress,
   passwordHidden,
   passwordHiddenToggle,
   recoverPassword,
+  buttonTitle,
 }) => {
   const styles = getStyles();
 
@@ -27,24 +30,28 @@ const UserAuthForm = ({
         <Text style={styles.messageSubtitle}>{subTitle}</Text>
       </View>
       <View style={styles.textInputContainer}>
-        <TextInput
-          placeholder={'Email'}
-          secureText={false}
-          value={email}
-          onTextUpdate={onEmailUpdate}
-          style={styles.textInput}
-        />
-        <TextInput
-          placeholder={'Password'}
-          secureText={true}
-          isSecureTextHidden={passwordHidden}
-          value={password}
-          onTextUpdate={onPasswordUpdate}
-          onSecureTextToggle={passwordHiddenToggle}
-          style={styles.textInput}
-        />
+        {isEmailInputShown && (
+          <TextInput
+            placeholder={'Email'}
+            secureText={false}
+            value={email}
+            onTextUpdate={onEmailUpdate}
+            style={styles.textInput}
+          />
+        )}
+        {isPasswordInputShown && (
+          <TextInput
+            placeholder={'Password'}
+            secureText={true}
+            isSecureTextHidden={passwordHidden}
+            value={password}
+            onTextUpdate={onPasswordUpdate}
+            onSecureTextToggle={passwordHiddenToggle}
+            style={styles.textInput}
+          />
+        )}
       </View>
-      {!isUserRegistering && (
+      {!isRecoverPassHidden && (
         <TouchableOpacity
           onPress={recoverPassword}
           style={styles.recoverPasswordContainer}
@@ -55,7 +62,7 @@ const UserAuthForm = ({
         </TouchableOpacity>
       )}
       <Button
-        title={isUserRegistering ? 'Sign Up' : 'Sign In'}
+        title={buttonTitle}
         onPress={onButtonPress}
         style={styles.button}
       />

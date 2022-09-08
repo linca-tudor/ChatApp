@@ -34,13 +34,16 @@ const SignUpScreen = ({
           title={Strings.signUp.title}
           subTitle={Strings.signUp.subTitle}
           email={email}
+          isEmailInputShown
           password={password}
+          isPasswordInputShown
           onEmailUpdate={(text) => setEmail(text)}
           onPasswordUpdate={(text) => setPassword(text)}
-          isUserRegistering={true}
+          isRecoverPassHidden={true}
           onButtonPress={() => signUp(email, password)}
           passwordHidden={passwordHidden}
           passwordHiddenToggle={passwordHiddenToggle}
+          buttonTitle={Strings.signUp.buttonTitle}
         />
         <View style={styles.alreadyRegisteredContainer}>
           <Text style={styles.alreadyRegisteredText}>
