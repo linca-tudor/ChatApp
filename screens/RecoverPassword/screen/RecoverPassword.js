@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
-import TextInput from '../../../components/TextInput';
-import Button from '../../../components/Button';
 import Screen from '../../../components/Screen';
 import Colors from '../../../assets/Colors';
 import Strings from '../../../assets/Strings';
