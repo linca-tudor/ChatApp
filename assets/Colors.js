@@ -1,5 +1,6 @@
 const Colors = {
   lavenderMist: '#EDE9FA',
+  periwinkle: '#D2C8F3',
   watermelon: '#F55255',
   ferrariRed: '#F10E12',
   white: '#FFFFFF',

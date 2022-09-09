@@ -15,7 +15,7 @@ const SignUpScreenContainer = ({ navigation }) => {
   };
 
   async function signUp(email, password) {
-    if (email === '' || password === '') {
+    if (email === '' || password === '' || confirmPassword === '') {
       setError(Strings.signUp.emptyEmailPassErr);
       return;
     }

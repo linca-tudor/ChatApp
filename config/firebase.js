@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
 import 'firebase/auth';
 import Constants from 'expo-constants';
 
@@ -17,6 +18,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 
-export default app;
+// Initialize Realtime Database and get a reference to the service
+export const database = getDatabase(app);

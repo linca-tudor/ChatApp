@@ -40,15 +40,17 @@ const UserAuthForm = ({
           />
         )}
         {isPasswordInputShown && (
-          <TextInput
-            placeholder={'Password'}
-            secureText={true}
-            isSecureTextHidden={passwordHidden}
-            value={password}
-            onTextUpdate={onPasswordUpdate}
-            onSecureTextToggle={passwordHiddenToggle}
-            style={styles.textInput}
-          />
+          <>
+            <TextInput
+              placeholder={'Password'}
+              secureText={true}
+              isSecureTextHidden={passwordHidden}
+              value={password}
+              onTextUpdate={onPasswordUpdate}
+              onSecureTextToggle={passwordHiddenToggle}
+              style={styles.textInput}
+            />
+          </>
         )}
       </View>
       {!isRecoverPassHidden && (
