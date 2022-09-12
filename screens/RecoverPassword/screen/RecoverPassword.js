@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import Screen from '../../../components/Screen';
 import Colors from '../../../assets/Colors';
 import Strings from '../../../assets/Strings';
-import UserAuthForm from '../../../components/UserAuthForm';
+import UserForm from '../../../components/UserForm';
 import getStyles from './RecoverPassword.styles';
 
 const RecoverPassword = ({ onButtonPress, err }) => {
@@ -23,7 +23,7 @@ const RecoverPassword = ({ onButtonPress, err }) => {
             <Text style={styles.errorText}>{error}</Text>
           </View>
         )}
-        <UserAuthForm
+        <UserForm
           title={Strings.recoverPassword.title}
           subTitle={Strings.recoverPassword.subTitle}
           email={email}

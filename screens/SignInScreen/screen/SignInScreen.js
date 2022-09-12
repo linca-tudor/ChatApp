@@ -4,7 +4,7 @@ import getStyles from './SignInScreen.styles';
 import Colors from '../../../assets/Colors';
 import Strings from '../../../assets/Strings';
 import Screen from '../../../components/Screen';
-import UserAuthForm from '../../../components/UserAuthForm';
+import UserForm from '../../../components/UserForm';
 
 const SignInScreen = ({
   signIn,
@@ -33,7 +33,7 @@ const SignInScreen = ({
             <Text style={styles.errorText}>{error}</Text>
           </View>
         )}
-        <UserAuthForm
+        <UserForm
           title={Strings.signIn.title}
           subTitle={Strings.signIn.subTitle}
           email={email}

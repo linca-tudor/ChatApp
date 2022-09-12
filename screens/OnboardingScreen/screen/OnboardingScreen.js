@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import Screen from '../../../components/Screen';
 import Colors from '../../../assets/Colors';
 import Strings from '../../../assets/Strings';
-import UserAuthForm from '../../../components/UserAuthForm';
+import UserForm from '../../../components/UserForm';
 import getStyles from './OnboardingScreen.styles';
 
 const OnboardingScreen = ({ onButtonPress, err }) => {
@@ -26,7 +26,7 @@ const OnboardingScreen = ({ onButtonPress, err }) => {
         <View style={styles.container}>
           <Text>Aici va veni screen de upload poze</Text>
         </View>
-        <UserAuthForm
+        <UserForm
           title={Strings.onboarding.title}
           subTitle={Strings.onboarding.subTitle}
           email={name}

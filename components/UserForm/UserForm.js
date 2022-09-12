@@ -3,9 +3,9 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import Strings from '../../assets/Strings';
 import Button from '../Button';
 import TextInput from '../TextInput';
-import getStyles from './UserAuthForm.styles';
+import getStyles from './UserForm.styles';
 
-const UserAuthForm = ({
+const UserForm = ({
   title,
   subTitle,
   email,
@@ -74,4 +74,4 @@ const UserAuthForm = ({
   );
 };
 
-export default UserAuthForm;
+export default UserForm;
