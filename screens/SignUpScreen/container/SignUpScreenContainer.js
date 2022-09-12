@@ -24,7 +24,6 @@ const SignUpScreenContainer = ({ navigation }) => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       setError('');
-      navigate(Routes.enterUserProfileData);
     } catch (error) {
       console.log(error);
       setError(error.message);

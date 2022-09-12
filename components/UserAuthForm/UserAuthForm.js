@@ -20,6 +20,8 @@ const UserAuthForm = ({
   passwordHiddenToggle,
   recoverPassword,
   buttonTitle,
+  firstFieldTitle,
+  secondFieldTitle,
 }) => {
   const styles = getStyles();
 
@@ -32,7 +34,7 @@ const UserAuthForm = ({
       <View style={styles.textInputContainer}>
         {isEmailInputShown && (
           <TextInput
-            placeholder={'Email'}
+            placeholder={firstFieldTitle}
             secureText={false}
             value={email}
             onTextUpdate={onEmailUpdate}
@@ -42,7 +44,7 @@ const UserAuthForm = ({
         {isPasswordInputShown && (
           <>
             <TextInput
-              placeholder={'Password'}
+              placeholder={secondFieldTitle}
               secureText={true}
               isSecureTextHidden={passwordHidden}
               value={password}

@@ -2,7 +2,8 @@ const Routes = {
   signIn: 'SignIn',
   signUp: 'SignUp',
   recoverPassword: 'RecoverPasword',
-  enterUserProfileData: 'EnterUserProfileData',
+  userDrawer: 'UserDrawer',
+  onboarding: 'Onboarding',
 };
 
 export default Routes;

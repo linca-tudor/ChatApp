@@ -4,10 +4,10 @@ import Screen from '../../../components/Screen';
 import Colors from '../../../assets/Colors';
 import Strings from '../../../assets/Strings';
 import UserAuthForm from '../../../components/UserAuthForm';
-import getStyles from './RecoverPassword.styles';
+import getStyles from './OnboardingScreen.styles';
 
-const RecoverPassword = ({ onButtonPress, err }) => {
-  const [email, setEmail] = useState('');
+const OnboardingScreen = ({ onButtonPress, err }) => {
+  const [name, setName] = useState('');
   const [error, setError] = useState('');
   const styles = getStyles();
 
@@ -23,20 +23,23 @@ const RecoverPassword = ({ onButtonPress, err }) => {
             <Text style={styles.errorText}>{error}</Text>
           </View>
         )}
+        <View style={styles.container}>
+          <Text>Aici va veni screen de upload poze</Text>
+        </View>
         <UserAuthForm
-          title={Strings.recoverPassword.title}
-          subTitle={Strings.recoverPassword.subTitle}
-          email={email}
+          title={Strings.onboarding.title}
+          subTitle={Strings.onboarding.subTitle}
+          email={name}
           isEmailInputShown
-          onEmailUpdate={(text) => setEmail(text)}
+          onEmailUpdate={(text) => setName(text)}
           isRecoverPassHidden={true}
-          onButtonPress={() => onButtonPress(email)}
-          buttonTitle={Strings.recoverPassword.buttonTitle}
-          firstFieldTitle={Strings.general.email}
+          onButtonPress={() => onButtonPress(name)}
+          buttonTitle={Strings.onboarding.buttonTitle}
+          firstFieldTitle={Strings.general.yourName}
         />
       </View>
     </Screen>
   );
 };
 
-export default RecoverPassword;
+export default OnboardingScreen;

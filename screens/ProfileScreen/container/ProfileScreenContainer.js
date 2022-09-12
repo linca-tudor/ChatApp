@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProfileScreen from '../screen';
 import { getAuth, signOut } from 'firebase/auth';
-import EnterDisplayName from '../../EnterUserProfileData'
 import { useNavigation } from '@react-navigation/native';
 import Routes from '../../../assets/Routes';
 
 const ProfileScreenContainer = () => {
   const auth = getAuth();
-  const { navigate } = useNavigation()
+  const { navigate } = useNavigation();
   const onSignOutPress = () => {
-    signOut(auth);
+    // signOut(auth); 
+    navigate(Routes.onboarding) // TODO: Remove after dev
   };
 
-  const { uid, displayName, email, photoURL } = auth.currentUser;
+  useEffect(() => {
+    if (!displayName && !photoURL) {
+      navigate(Routes.onboarding);
+    }
+  }, []);
 
-  if (!!!displayName) {
-    navigate(Routes.enterUserProfileData);
-  }
+  const { uid, email, displayName, photoURL } = auth.currentUser;
 
   return (
     <ProfileScreen

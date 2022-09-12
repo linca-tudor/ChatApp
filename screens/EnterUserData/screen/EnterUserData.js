@@ -4,9 +4,9 @@ import Screen from '../../../components/Screen';
 import Colors from '../../../assets/Colors';
 import Strings from '../../../assets/Strings';
 import UserAuthForm from '../../../components/UserAuthForm';
-import getStyles from './EnterUserProfileData.styles';
+import getStyles from './EnterDisplayName.styles';
 
-const EnterUserProfileData = ({ onButtonPress, err }) => {
+const EnterDisplayName = ({ onButtonPress, err }) => {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const styles = getStyles();
@@ -24,18 +24,18 @@ const EnterUserProfileData = ({ onButtonPress, err }) => {
           </View>
         )}
         <UserAuthForm
-          title={Strings.enterUserDisplayName.title}
-          subTitle={Strings.enterUserDisplayName.subTitle}
+          title={Strings.onboarding.title}
+          subTitle={Strings.onboarding.subTitle}
           email={name}
           isEmailInputShown
           onEmailUpdate={(text) => setName(text)}
           isRecoverPassHidden={true}
           onButtonPress={() => onButtonPress(name)}
-          buttonTitle={Strings.enterUserDisplayName.buttonTitle}
+          buttonTitle={Strings.onboarding.buttonTitle}
         />
       </View>
     </Screen>
   );
 };
 
-export default EnterUserProfileData;
+export default EnterDisplayName;

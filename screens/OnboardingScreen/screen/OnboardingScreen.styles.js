@@ -8,7 +8,7 @@ const getStyles = () => {
       flex: 1,
     },
     container: {
-      justifyContent: 'flex-cen',
+      justifyContent: 'center',
       paddingHorizontal: 20,
       backgroundColor: Colors.lavenderMist,
     },

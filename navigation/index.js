@@ -1,12 +1,12 @@
 import React from "react";
 import useAuthentication from "./../utils/hooks";
-import UserDrawer from "./userDrawer";
-import AuthStack from "./authStack";
+import UserStack from "./UserStack";
+import AuthStack from "./AuthStack";
 
 const RootNavigation = () => {
   const { user } = useAuthentication();
 
-  return user ? <UserDrawer /> : <AuthStack />;
+  return user ? <UserStack /> : <AuthStack />;
 };
 
 export default RootNavigation;
