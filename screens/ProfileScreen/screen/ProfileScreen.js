@@ -1,14 +1,13 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import Button from '../../../components/Button'
+import Button from '../../../components/Button';
 import getStyles from './ProfileScreen.styles';
 
-const ProfileScreen = ({ onSignOutPress, email }) => {
+const ProfileScreen = ({ onSignOutPress, uid, name, email, photoURl }) => {
   const styles = getStyles();
   return (
     <View style={[styles.flex, styles.container]}>
-      <Text>Welcome {email}!</Text>
-
+      <Text>Welcome {uid}!</Text>
       <Button title="Sign Out" style={styles.button} onPress={onSignOutPress} />
     </View>
   );

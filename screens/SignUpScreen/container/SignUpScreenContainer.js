@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SignUpScreen from '../screen';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import Strings from '../../../assets/Strings';
+import Routes from '../../../assets/Routes';
 import { useNavigation } from '@react-navigation/native';
 
 const SignUpScreenContainer = ({ navigation }) => {
@@ -15,7 +16,7 @@ const SignUpScreenContainer = ({ navigation }) => {
   };
 
   async function signUp(email, password) {
-    if (email === '' || password === '' || confirmPassword === '') {
+    if (email === '' || password === '') {
       setError(Strings.signUp.emptyEmailPassErr);
       return;
     }
@@ -23,7 +24,7 @@ const SignUpScreenContainer = ({ navigation }) => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       setError('');
-      navigation.navigate('Sign In');
+      navigate(Routes.enterUserProfileData);
     } catch (error) {
       console.log(error);
       setError(error.message);
@@ -36,7 +37,7 @@ const SignUpScreenContainer = ({ navigation }) => {
       err={error}
       passwordHidden={passwordHidden}
       passwordHiddenToggle={onSecureTextTogle}
-      onBottomLinkPress={() => navigate('Sign In')}
+      onBottomLinkPress={() => navigate(Routes.signIn)}
     />
   );
 };

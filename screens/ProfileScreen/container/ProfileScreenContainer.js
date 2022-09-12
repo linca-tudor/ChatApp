@@ -1,18 +1,22 @@
 import React from 'react';
 import ProfileScreen from '../screen';
-import useAuthentication from '../../../utils/hooks';
-import { AuthCredential, getAuth, signOut } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
+import EnterDisplayName from '../../EnterUserProfileData'
+import { useNavigation } from '@react-navigation/native';
+import Routes from '../../../assets/Routes';
 
 const ProfileScreenContainer = () => {
-  const { user } = useAuthentication();
   const auth = getAuth();
+  const { navigate } = useNavigation()
   const onSignOutPress = () => {
     signOut(auth);
   };
 
-  const { uid, displayName, email, photoURL } = user;
+  const { uid, displayName, email, photoURL } = auth.currentUser;
 
-  
+  if (!!!displayName) {
+    navigate(Routes.enterUserProfileData);
+  }
 
   return (
     <ProfileScreen

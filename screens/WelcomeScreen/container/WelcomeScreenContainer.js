@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import WelcomeScreen from "../screen";
+import Routes from '../../../assets/Routes'
 
 const WelcomeScreenContainer = () => {
   const { navigate } = useNavigation();
@@ -8,11 +9,11 @@ const WelcomeScreenContainer = () => {
   const imageSource = require("../../../assets/images/Welcome.png");
 
   const onSignInPress = () => {
-    navigate("Sign In");
+    navigate(Routes.signIn);
   };
 
   const onSignUpPress = () => {
-    navigate("Sign Up");
+    navigate(Routes.signUp);
   };
 
   return (

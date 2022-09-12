@@ -42,7 +42,7 @@ const getStyles = () => {
     alreadyRegisteredRoute: {
       fontSize: 16,
       fontWeight: '600',
-      color: Colors.watermelon,
+      color: Colors.ultramarineBlue,
     },
   });
 };

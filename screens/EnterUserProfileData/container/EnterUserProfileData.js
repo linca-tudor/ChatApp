@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
-import RecoverPassword from '../screen/RecoverPassword';
+import EnterDisplayName from '../screen/EnterUserProfileData';
 import { useNavigation } from '@react-navigation/native';
 import Strings from '../../../assets/Strings';
 import Routes from '../../../assets/Routes';
 
-const RecoverPasswordContainer = () => {
+const EnterUserProfileDataContainer = () => {
   const [error, setError] = useState();
   const auth = getAuth();
   const { navigate } = useNavigation();
 
-  const recoverPassword = async (email) => {
-    if (email === '') {
+  const updateDisplayName = async (name) => {
+    if (name === '') {
       setError(Strings.recoverPassword.emptyEmailErr);
       return;
     }
     try {
-      await sendPasswordResetEmail(auth, email);
+      await auth.currentUser.updateProfile(auth, email);
       setError('');
       navigate(Routes.signIn);
     } catch (error) {
@@ -24,7 +24,9 @@ const RecoverPasswordContainer = () => {
     }
   };
 
-  return <RecoverPassword onButtonPress={recoverPassword} err={error} />;
+
+
+  return <EnterDisplayName onButtonPress={null} err={error} />;
 };
 
-export default RecoverPasswordContainer;
+export default EnterUserProfileDataContainer;

@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import Strings from '../../../assets/Strings';
+import Routes from '../../../assets/Routes';
 import { useNavigation } from '@react-navigation/native';
 
 const SignInScreenContainer = () => {
@@ -34,11 +35,11 @@ const SignInScreenContainer = () => {
   return (
     <SignInScreen
       signIn={signIn}
-      recoverPassword={() => navigate('Recover Password')}
+      recoverPassword={() => navigate(Routes.recoverPassword)}
       err={error}
       passwordHidden={passwordHidden}
       passwordHiddenToggle={onSecureTextTogle}
-      onBottomLinkPress={() => navigate('Sign Up')}
+      onBottomLinkPress={() => navigate(Routes.signUp)}
     />
   );
 };

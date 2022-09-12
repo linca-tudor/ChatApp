@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
+import { initializeApp } from 'firebase/app';
 import 'firebase/auth';
 import Constants from 'expo-constants';
 
@@ -15,10 +14,9 @@ const firebaseConfig = {
   storageBucket: Constants.manifest?.extra?.firebaseStorageBucket,
   messagingSenderId: Constants.manifest?.extra?.firebaseMessagingSenderId,
   appId: Constants.manifest?.extra?.firebaseAppId,
+  databaseURL:
+    'https://chatapp-af6ec-default-rtdb.europe-west1.firebasedatabase.app/',
 };
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-
-// Initialize Realtime Database and get a reference to the service
-export const database = getDatabase(app);
+const app = initializeApp(firebaseConfig);

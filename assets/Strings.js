@@ -30,7 +30,11 @@ const Strings = {
     emptyEmailErr:
       'Please input the e-mail address to attempt password recovery',
   },
-
+  enterUserDisplayName: {
+    title: 'Enter your name!',
+    subTitle: 'This will be the name outher people will see',
+    buttonTitle: 'Save',
+  },
 };
 
 export default Strings;

@@ -8,7 +8,7 @@ const getStyles = () => {
       flex: 1,
     },
     container: {
-      justifyContent: 'flex-start',
+      justifyContent: 'flex-cen',
       paddingHorizontal: 20,
       backgroundColor: Colors.lavenderMist,
     },
@@ -24,21 +24,6 @@ const getStyles = () => {
       textAlign: 'center',
       color: Colors.white,
       fontSize: 15,
-    },
-    notRegisteredContainer: {
-      marginTop: 'auto',
-      marginBottom: 20,
-      flexDirection: 'row',
-      justifyContent: 'center'
-    },
-    notRegisteredText: {
-      fontSize: 16,
-      marginRight: 5,
-    },
-    notRegisteredRoute: {
-      fontSize: 16,
-      fontWeight: '600',
-      color: Colors.ultramarineBlue,
     },
   });
 };
