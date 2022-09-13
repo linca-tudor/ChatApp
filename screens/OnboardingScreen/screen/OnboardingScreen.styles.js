@@ -25,6 +25,15 @@ const getStyles = () => {
       color: Colors.white,
       fontSize: 15,
     },
+    saveButton: {
+      marginTop: 10,
+    },
+    skipButton: {},
+    skipButtonText: {
+      fontSize: 16,
+      fontWeight: '600',
+      color: Colors.ultramarineBlue,
+    },
   });
 };
 

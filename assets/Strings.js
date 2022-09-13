@@ -3,6 +3,9 @@ const Strings = {
     email: 'email',
     password: 'password',
     yourName:'Your name',
+    skip: 'Skip',
+    save: 'Save',
+    upload: 'Upload',
   },
   welcome: {
     title: 'Say "hello" to a different messaging experience',

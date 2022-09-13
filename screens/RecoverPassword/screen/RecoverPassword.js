@@ -32,7 +32,6 @@ const RecoverPassword = ({ onButtonPress, err }) => {
           isRecoverPassHidden={true}
           onButtonPress={() => onButtonPress(email)}
           buttonTitle={Strings.recoverPassword.buttonTitle}
-          firstFieldTitle={Strings.general.email}
         />
       </View>
     </Screen>

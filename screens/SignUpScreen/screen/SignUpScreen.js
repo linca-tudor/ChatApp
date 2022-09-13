@@ -44,8 +44,6 @@ const SignUpScreen = ({
           passwordHidden={passwordHidden}
           passwordHiddenToggle={passwordHiddenToggle}
           buttonTitle={Strings.signUp.buttonTitle}
-          firstFieldTitle={Strings.general.email}
-          secondFieldTitle={Strings.general.password}
 
         />
         <View style={styles.alreadyRegisteredContainer}>

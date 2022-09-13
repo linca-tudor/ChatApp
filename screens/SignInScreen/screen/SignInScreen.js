@@ -48,8 +48,6 @@ const SignInScreen = ({
           passwordHiddenToggle={passwordHiddenToggle}
           recoverPassword={() => recoverPassword(email)}
           buttonTitle={Strings.signIn.buttonTitle}
-          firstFieldTitle={Strings.general.email}
-          secondFieldTitle={Strings.general.password}
         />
         <View style={styles.notRegisteredContainer}>
           <Text style={styles.notRegisteredText}>
