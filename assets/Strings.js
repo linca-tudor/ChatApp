@@ -5,7 +5,9 @@ const Strings = {
     yourName:'Your name',
     skip: 'Skip',
     save: 'Save',
-    upload: 'Upload',
+    upload: 'Upload photo',
+    takePhoto: 'Take a photo',
+    openGallery: 'Open Photo Gallery',
   },
   welcome: {
     title: 'Say "hello" to a different messaging experience',
@@ -43,6 +45,8 @@ const Strings = {
     subTitle: 'This will be the name outher people will see',
     buttonTitle: 'Save',
     emptyNameErr: 'Please type your name',
+    refusedCameraPermission: 'You\'ve refused to allow this app to access your camera!',
+    refusedGalleryPersmission: 'You\'ve refused to allow this app to access your photos!',
   },
 };
 

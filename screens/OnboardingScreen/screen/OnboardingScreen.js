@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import Screen from '../../../components/Screen';
 import Colors from '../../../assets/Colors';
 import Strings from '../../../assets/Strings';
-import UserForm from '../../../components/UserForm';
 import getStyles from './OnboardingScreen.styles';
 import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
 
-const OnboardingScreen = ({ onButtonPress, onTextUpdate, err, txt }) => {
+const OnboardingScreen = ({
+  onSavePress,
+  onPickImagePress,
+  onOpenCameraPress,
+  onTextUpdate,
+  err,
+  txt,
+  image,
+}) => {
   const [text, setText] = useState('');
   const [error, setError] = useState('');
   const styles = getStyles();
@@ -26,15 +33,24 @@ const OnboardingScreen = ({ onButtonPress, onTextUpdate, err, txt }) => {
             <Text style={styles.errorText}>{error}</Text>
           </View>
         )}
-        {/* <View>
+        <View>
+          {image && (
+            <Image
+              source={{ uri: image }}
+              style={{ width: 200, height: 200 }}
+            />
+          )}
           <Button
-            onPress={() => {
-              console.log('Profile pic saved...\n');
-            }}
-            title={Strings.general.upload}
+            onPress={onPickImagePress}
+            title={Strings.general.openGallery}
             style={styles.saveButton}
           />
-        </View> */}
+          <Button
+            onPress={onOpenCameraPress}
+            title={Strings.general.takePhoto}
+            style={styles.saveButton}
+          />
+        </View>
         <View>
           <TextInput
             placeholder={Strings.general.yourName}
@@ -46,7 +62,7 @@ const OnboardingScreen = ({ onButtonPress, onTextUpdate, err, txt }) => {
           />
 
           <Button
-            onPress={onButtonPress}
+            onPress={onSavePress}
             title={Strings.general.save}
             style={styles.saveButton}
           />
