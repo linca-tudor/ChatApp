@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-// import { getStorage } from 'firebase/storage';
-import 'firebase/auth';
+import { getStorage } from 'firebase/storage';
 import Constants from 'expo-constants';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -21,4 +20,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Initialize Cloud Storage and get a reference to the service
-// const storage = getStorage(app);
+export const storage = getStorage(app);

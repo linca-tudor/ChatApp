@@ -44,7 +44,6 @@ const OnboardingScreenContainer = () => {
     setRemoteURL(fileUrl);
     setIsUploading(false);
     setImageURI(null);
-    log
   };
 
   const onFail = (error) => {

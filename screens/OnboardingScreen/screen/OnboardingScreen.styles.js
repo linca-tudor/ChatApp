@@ -16,6 +16,7 @@ const getStyles = () => {
       alignItems: 'center',
       justifyContent: 'center',
       marginTop: 10,
+      // marginBottom: 'auto',
       padding: 10,
       backgroundColor: Colors.ferrariRed,
       borderRadius: 12.5,

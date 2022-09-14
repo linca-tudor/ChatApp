@@ -11,6 +11,7 @@ const OnboardingScreen = ({
   onSavePress,
   onPickImagePress,
   onOpenCameraPress,
+  onUploadPress,
   onTextUpdate,
   err,
   txt,
@@ -51,7 +52,7 @@ const OnboardingScreen = ({
             style={styles.saveButton}
           />
           <Button
-            onPress={onOpenCameraPress}
+            onPress={onUploadPress}
             title={Strings.general.upload}
             style={styles.saveButton}
           />
