@@ -3,12 +3,19 @@ import { getAuth, updateProfile } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import Strings from '../../../assets/Strings';
 import OnboardingScreen from '../screen/OnboardingScreen';
-import * as ExpoImagePicker from 'expo-image-picker';
+import { pickCameraImage } from './utils/pickImage';
+import { pickGalleryImage } from './utils/pickImage';
+import getBlobFromUri from './utils/getBlobFromURI';
+import fileUpload from './utils/fileUpload';
+import { uuidv4 } from '@firebase/util';
 
 const OnboardingScreenContainer = () => {
   const [error, setError] = useState('');
   const [name, setName] = useState('');
-  const [imagePath, setImagePath] = useState(null);
+  const [imageURI, setImageURI] = useState(null);
+  const [isUploading, setIsUploading] = React.useState(false);
+  const [progress, setProgress] = React.useState(0);
+  const [remoteURL, setRemoteURL] = React.useState('');
   const auth = getAuth();
   const { goBack } = useNavigation();
 
@@ -26,64 +33,49 @@ const OnboardingScreenContainer = () => {
     }
   };
 
-  const pickGalleryImage = async () => {
-    const permissionResult =
-      await ExpoImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      alert(Strings.onboarding.refusedGalleryPersmission);
-      return;
-    }
-
-    const result = await ExpoImagePicker.launchImageLibraryAsync({
-      mediaTypes: ExpoImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      allowsMultipleSelection: false,
-      aspect: [1, 1],
-      quality: 1,
-      selectionLimit: 1,
-    });
-
-    if (!result.cancelled) {
-      setImagePath(result.uri);
-      // console.log(result);
-      console.log(imagePath);
-    }
+  const onStart = () => {
+    setIsUploading(true);
   };
 
-  const pickCameraImage = async () => {
-    const permissionResult =
-      await ExpoImagePicker.requestCameraPermissionsAsync();
+  const onProgress = (progress) => {
+    setProgress(progress);
+  };
+  const onComplete = (fileUrl) => {
+    setRemoteURL(fileUrl);
+    setIsUploading(false);
+    setImageURI(null);
+    log
+  };
 
-    if (permissionResult.granted === false) {
-      alert(Strings.onboarding.refusedCameraPermission);
+  const onFail = (error) => {
+    setError(error);
+    setIsUploading(false);
+  };
+  const handleFileUpload = async () => {
+    if (!imageURI) {
+      setError('Please pick a picture!');
       return;
     }
 
-    const result = await ExpoImagePicker.launchCameraAsync({
-      mediaTypes: ExpoImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      allowsMultipleSelection: false,
-      aspect: [1, 1],
-      quality: 1,
-      selectionLimit: 1,
-    });
+    const blob = await getBlobFromUri(imageURI);
 
-    if (!result.cancelled) {
-      setImagePath(result.uri);
-      console.log(imagePath);
-    }
+    fileUpload(
+      blob,
+      { onStart, onProgress, onComplete, onFail },
+      uuidv4()
+    );
   };
 
   return (
     <OnboardingScreen
       onSavePress={() => updateDisplayName(name)}
-      onPickImagePress={() => pickGalleryImage()}
-      onOpenCameraPress={() => pickCameraImage()}
+      onPickImagePress={() => pickGalleryImage(setImageURI)}
+      onOpenCameraPress={() => pickCameraImage(setImageURI)}
+      onUploadPress={() => handleFileUpload()}
       onTextUpdate={(name) => setName(name)}
       err={error}
       txt={name}
-      image={imagePath}
+      image={imageURI}
     />
   );
 };
