@@ -14,8 +14,8 @@ const ProfileScreenContainer = () => {
   const { uid, email } = auth.currentUser;
 
   const onSignOutPress = () => {
-    // signOut(auth);
-    navigate(Routes.onboarding); // TODO: Remove after dev
+    signOut(auth);
+    // navigate(Routes.onboarding); // TODO: Remove after dev
   };
 
   useEffect(() => {

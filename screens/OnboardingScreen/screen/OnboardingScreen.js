@@ -50,6 +50,11 @@ const OnboardingScreen = ({
             title={Strings.general.takePhoto}
             style={styles.saveButton}
           />
+          <Button
+            onPress={onOpenCameraPress}
+            title={Strings.general.upload}
+            style={styles.saveButton}
+          />
         </View>
         <View>
           <TextInput

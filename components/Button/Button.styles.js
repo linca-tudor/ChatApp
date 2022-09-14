@@ -13,7 +13,7 @@ const getStyles = () => {
       justifyContent: 'center',
     },
     text: {
-      fontSize: 18,
+      fontSize: Platform.OS === 'android' ? 16 : 19,
       fontWeight: '600',
       color: Colors.white,
     },
