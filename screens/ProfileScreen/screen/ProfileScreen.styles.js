@@ -15,6 +15,11 @@ const getStyles = () => {
     button: {
       marginTop: 10,
     },
+    image: {
+      width: 300,
+      height: 300,
+      alignSelf: 'center',
+    },
   });
 };
 
