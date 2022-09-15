@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as ExpoImagePicker from 'expo-image-picker';
+import fileUpload from './fileUpload';
+import getBlobFromUri from './getBlobFromURI';
 
-export const pickGalleryImage = async (setImageURI) => {
+const handleFileUpload = async (
+  imageURI,
+  path,
+  { onStart, onProgress, onComplete, onFail }
+) => {
+  const blob = await getBlobFromUri(imageURI);
+
+  fileUpload(blob, { onStart, onProgress, onComplete, onFail }, path);
+};
+
+export const pickGalleryImage = async (
+  { onStart, onProgress, onComplete, onFail },
+  path
+) => {
   const permissionResult =
     await ExpoImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -15,16 +30,23 @@ export const pickGalleryImage = async (setImageURI) => {
     allowsEditing: true,
     allowsMultipleSelection: false,
     aspect: [1, 1],
-    quality: 1,
     selectionLimit: 1,
   });
 
   if (!result.cancelled) {
-    setImageURI(result.uri);
+    handleFileUpload(result.uri, path, {
+      onStart,
+      onProgress,
+      onComplete,
+      onFail,
+    });
   }
 };
 
-export const pickCameraImage = async (setImageURI) => {
+export const pickCameraImage = async (
+  { onStart, onProgress, onComplete, onFail },
+  path
+) => {
   const permissionResult =
     await ExpoImagePicker.requestCameraPermissionsAsync();
 
@@ -38,11 +60,15 @@ export const pickCameraImage = async (setImageURI) => {
     allowsEditing: true,
     allowsMultipleSelection: false,
     aspect: [1, 1],
-    quality: 1,
     selectionLimit: 1,
   });
 
   if (!result.cancelled) {
-    setImageURI(result.uri);
+    handleFileUpload(result.uri, path, {
+      onStart,
+      onProgress,
+      onComplete,
+      onFail,
+    });
   }
 };

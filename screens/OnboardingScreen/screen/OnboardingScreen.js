@@ -11,7 +11,6 @@ const OnboardingScreen = ({
   onSavePress,
   onPickImagePress,
   onOpenCameraPress,
-  onUploadPress,
   onTextUpdate,
   err,
   txt,
@@ -34,13 +33,8 @@ const OnboardingScreen = ({
             <Text style={styles.errorText}>{error}</Text>
           </View>
         )}
-        <View>
-          {image && (
-            <Image
-              source={{ uri: image }}
-              style={{ width: 200, height: 200 }}
-            />
-          )}
+        <View style={styles.imageContainer}>
+          {image && <Image source={{ uri: image }} style={styles.image} />}
           <Button
             onPress={onPickImagePress}
             title={Strings.general.openGallery}
@@ -49,11 +43,6 @@ const OnboardingScreen = ({
           <Button
             onPress={onOpenCameraPress}
             title={Strings.general.takePhoto}
-            style={styles.saveButton}
-          />
-          <Button
-            onPress={onUploadPress}
-            title={Strings.general.upload}
             style={styles.saveButton}
           />
         </View>

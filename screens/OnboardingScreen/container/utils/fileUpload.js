@@ -1,13 +1,14 @@
 import React from 'react';
 import { storage } from '../../../../config/firebase';
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
+import { uuidv4 } from '@firebase/util';
 
 const fileUpload = async (
   fileBlob,
   { onStart, onProgress, onComplete, onFail },
-  id
+  path
 ) => {
-  const storageRef = ref(storage, `images/profile/${id}.jpg`);
+  const storageRef = ref(storage, `images/${path}/${uuidv4()}.jpg`);
 
   // Create file metadata including the content type
   const metadata = {
@@ -31,13 +32,14 @@ const fileUpload = async (
     },
     (error) => {
       // Something went wrong - dispatch onFail event with error  response
+      console.log('Upload from fileUpload.js failer', error);
       onFail && onFail(error);
     },
     () => {
       // Upload completed successfully, now we can get the download URL
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         console.log('File available at', downloadURL);
-        onComplete && onComplete(downloadURL) 
+        onComplete && onComplete(downloadURL);
       });
     }
   );

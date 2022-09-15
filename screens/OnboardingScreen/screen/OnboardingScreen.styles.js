@@ -12,6 +12,15 @@ const getStyles = () => {
       paddingHorizontal: 20,
       backgroundColor: Colors.lavenderMist,
     },
+    imageContainer: {
+      marginBottom: 20,
+    },
+    textContainer: {},
+    image: {
+      width: 300,
+      height: 300,
+      alignSelf: 'center',
+    },
     error: {
       alignItems: 'center',
       justifyContent: 'center',

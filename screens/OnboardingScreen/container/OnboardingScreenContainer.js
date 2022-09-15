@@ -5,17 +5,12 @@ import Strings from '../../../assets/Strings';
 import OnboardingScreen from '../screen/OnboardingScreen';
 import { pickCameraImage } from './utils/pickImage';
 import { pickGalleryImage } from './utils/pickImage';
-import getBlobFromUri from './utils/getBlobFromURI';
-import fileUpload from './utils/fileUpload';
-import { uuidv4 } from '@firebase/util';
 
 const OnboardingScreenContainer = () => {
   const [error, setError] = useState('');
   const [name, setName] = useState('');
-  const [imageURI, setImageURI] = useState(null);
   const [isUploading, setIsUploading] = React.useState(false);
   const [progress, setProgress] = React.useState(0);
-  const [remoteURL, setRemoteURL] = React.useState('');
   const auth = getAuth();
   const { goBack } = useNavigation();
 
@@ -40,41 +35,47 @@ const OnboardingScreenContainer = () => {
   const onProgress = (progress) => {
     setProgress(progress);
   };
+
   const onComplete = (fileUrl) => {
-    setRemoteURL(fileUrl);
     setIsUploading(false);
-    setImageURI(null);
+    updateProfile(auth.currentUser, { photoURL: fileUrl });
   };
 
   const onFail = (error) => {
+    console.log(('File Upload Error is: ', error));
     setError(error);
     setIsUploading(false);
-  };
-  const handleFileUpload = async () => {
-    if (!imageURI) {
-      setError('Please pick a picture!');
-      return;
-    }
-
-    const blob = await getBlobFromUri(imageURI);
-
-    fileUpload(
-      blob,
-      { onStart, onProgress, onComplete, onFail },
-      uuidv4()
-    );
   };
 
   return (
     <OnboardingScreen
       onSavePress={() => updateDisplayName(name)}
-      onPickImagePress={() => pickGalleryImage(setImageURI)}
-      onOpenCameraPress={() => pickCameraImage(setImageURI)}
-      onUploadPress={() => handleFileUpload()}
+      onPickImagePress={() =>
+        pickGalleryImage(
+          {
+            onStart,
+            onProgress,
+            onComplete,
+            onFail,
+          },
+          'profilePic'
+        )
+      }
+      onOpenCameraPress={() =>
+        pickCameraImage(
+          {
+            onStart,
+            onProgress,
+            onComplete,
+            onFail,
+          },
+          'profilePic'
+        )
+      }
       onTextUpdate={(name) => setName(name)}
       err={error}
       txt={name}
-      image={imageURI}
+      image={auth.currentUser.photoURL}
     />
   );
 };
