@@ -4,52 +4,30 @@ import { GiftedChat } from 'react-native-gifted-chat';
 import useAuthentication from '../../../utils/hooks';
 import { getAuth } from 'firebase/auth';
 import {
-  get,
-  limitToLast,
   ref,
   onChildAdded,
   serverTimestamp,
   push,
-  set,
+  onValue,
 } from 'firebase/database';
 import { database } from '../../../config/firebase';
+import { pickCameraImage } from '../../../utils/helpers/pickImage';
+import { uuidv4 } from '@firebase/util';
 
 const ChatScreenContainer = () => {
+  const [pendingID, setPendingID] = useState('');
   const [messages, setMessages] = useState([]);
+  const [isUploading, setIsUploading] = React.useState(false);
+  const [progress, setProgress] = React.useState(0);
   const auth = getAuth();
   const { uid, photoURL, displayName } = auth.currentUser;
 
   const databaseRef = ref(database, 'messages');
 
   useEffect(() => {
-    // setMessages([
-    //   {
-    //     _id: 1,
-    //     text: 'Hello developer',
-    //     createdAt: new Date(),
-    //     user: {
-    //       _id: 2,
-    //       name: 'React Native',
-    //       avatar: 'https://placeimg.com/140/140/any',
-    //     },
-    //   },
-
-    //   {
-    //     _id: '1CtXEL9v7hfgmsGOYT864HzgaGi1',
-    //     createdAt: '2022-09-15T15:53:59.830Z',
-    //     text: 'Kdnchdjsodnf',
-    //     user: {
-    //       _id: '2',
-    //       avatar:
-    //         'https://firebasestorage.googleapis.com/v0/b/chatapp-af6ec.appspot.com/o/images%2FprofilePic%2Fa00d4bb3-9f62-4c3b-8a4c-84e5caf08ead.jpg?alt=media&token=20f4bd97-5ca6-4a7b-91bf-612a1d58a7e8',
-    //       name: 'Tudor Linca',
-    //     },
-    //   },
-    // ]);
     const unsubscribe = onChildAdded(databaseRef, (snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
-        console.log('Snapshot data is: ', data, '\n');
         appendMessage(data);
       } else {
         console.log('Snapshot data NOT EXIST \n');
@@ -60,31 +38,92 @@ const ChatScreenContainer = () => {
   }, []);
 
   const appendMessage = (message) => {
-    setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, [message])
-    );
+    setMessages((previousMessages) => {
+      previousMessages?.filter((m) => m._id !== message._id);
+      return GiftedChat.append(previousMessages, [message]);
+    });
   };
 
   const uploadMessage = (messages) => {
     messages.forEach((message) => {
       push(databaseRef, message);
-      // console.log('Message is: ', message, '\n');
     });
   };
 
-  const timestamp = () => {
-    return get(serverTimestamp());
+  const onSendPress = (messages = []) => {
+    messages.forEach((message) => {
+      message.createdAt = serverTimestamp();
+      message.sent = true;
+    });
+    uploadMessage(messages);
   };
 
-  const onSend = (messages = []) => {
-    console.log('sent msg is: ', messages);
-    uploadMessage(messages);
+  const setPendingIDState = async () => {
+    setPendingID(uuidv4());
+  };
+
+  const onStart = async (localURI) => {
+  await setPendingIDState;
+    const message = {
+      _id: uuid,
+      text: '',
+      createdAt: new Date(),
+      user: {
+        _id: uid,
+        name: displayName,
+        avatar: photoURL,
+      },
+      image: localURI,
+      pending: true,
+    };
+    appendMessage(message);
+    setIsUploading(true);
+  };
+
+  const onProgress = (progress) => {
+    setProgress(progress);
+  };
+
+  const onComplete = useCallback(
+    (fileUrl) => {
+      const message = {
+        _id: uuid,
+        createdAt: serverTimestamp(),
+        user: {
+          _id: uid,
+          name: displayName,
+          avatar: photoURL,
+        },
+        image: fileUrl,
+        sent: true,
+      };
+      uploadMessage([message]);
+      setIsUploading(false);
+    },
+    [uid, displayName, photoURL]
+  );
+
+  const onFail = (error) => {
+    console.log(('File Upload Error is: ', error));
+    setIsUploading(false);
+    alert('Attachment upload failed!');
   };
 
   return (
     <ChatScreen
       messages={messages}
-      onSend={onSend}
+      onSendPress={onSendPress}
+      onAttachPress={() =>
+        pickCameraImage(
+          {
+            onStart,
+            onProgress,
+            onComplete,
+            onFail,
+          },
+          'messages'
+        )
+      }
       userId={uid}
       userName={displayName}
       userPhoto={photoURL}
