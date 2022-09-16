@@ -1,12 +1,13 @@
 import React from 'react';
-import { storage } from '../../../../config/firebase';
+import { storage } from '../../config/firebase';
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { uuidv4 } from '@firebase/util';
 
 const fileUpload = async (
   fileBlob,
   { onStart, onProgress, onComplete, onFail },
-  path
+  path,
+  localURI
 ) => {
   storage.maxUploadRetryTime = 3000;
 
@@ -18,7 +19,7 @@ const fileUpload = async (
   };
 
   // Trigger file upload start event
-  onStart && onStart();
+  onStart && onStart(localURI);
   const uploadTask = uploadBytesResumable(storageRef, fileBlob, metadata);
   // Listen for state changes, errors, and completion of the upload.
   uploadTask.on(

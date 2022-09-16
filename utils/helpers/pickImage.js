@@ -10,7 +10,7 @@ const handleFileUpload = async (
 ) => {
   const blob = await getBlobFromUri(imageURI);
 
-  fileUpload(blob, { onStart, onProgress, onComplete, onFail }, path);
+  fileUpload(blob, { onStart, onProgress, onComplete, onFail }, path, imageURI);
 };
 
 export const pickGalleryImage = async (
