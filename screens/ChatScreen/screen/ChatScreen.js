@@ -1,16 +1,21 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
 import { Button } from '../../../components/Button';
 import getStyles from './ChatScreen.styles';
 
-const ChatScreen = ({ onSignOutPress, email }) => {
+const ChatScreen = ({ onSend, messages, userId, userName, userPhoto }) => {
   const styles = getStyles();
   return (
-    <View style={styles.container}>
-      <Text>Welcome {email}!</Text>
-
-      <Button title="Sign Out" style={styles.button} onPress={onSignOutPress} />
-    </View>
+    <GiftedChat
+      messages={messages}
+      onSend={(messages) => onSend(messages)}
+      user={{
+        _id: userId,
+        name: userName,
+        avatar: userPhoto,
+      }}
+    />
   );
 };
 

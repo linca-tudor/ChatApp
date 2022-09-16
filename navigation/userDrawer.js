@@ -22,8 +22,8 @@ const UserDrawer = () => {
         drawerLabelStyle: styles.drawerLabel,
       }}
     >
-      <Drawer.Screen name="Profile" component={ProfileScreenContainer} />
       <Drawer.Screen name="Chat" component={ChatScreenContainer} />
+      <Drawer.Screen name="Profile" component={ProfileScreenContainer} />
     </Drawer.Navigator>
   );
 };

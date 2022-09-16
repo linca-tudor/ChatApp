@@ -3,8 +3,10 @@ import { getAuth, updateProfile } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import Strings from '../../../assets/Strings';
 import OnboardingScreen from '../screen/OnboardingScreen';
-import { pickCameraImage } from './utils/pickImage';
-import { pickGalleryImage } from './utils/pickImage';
+import {
+  pickCameraImage,
+  pickGalleryImage,
+} from '../../../utils/helpers/pickImage';
 
 const OnboardingScreenContainer = () => {
   const [error, setError] = useState('');
@@ -37,8 +39,9 @@ const OnboardingScreenContainer = () => {
   };
 
   const onComplete = (fileUrl) => {
-    setIsUploading(false);
-    updateProfile(auth.currentUser, { photoURL: fileUrl });
+    updateProfile(auth.currentUser, { photoURL: fileUrl }).then(() => {
+      setIsUploading(false);
+    });
   };
 
   const onFail = (error) => {

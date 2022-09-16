@@ -35,6 +35,7 @@ const ProfileScreenContainer = () => {
   return (
     <ProfileScreen
       onSignOutPress={onSignOutPress}
+      onPressTemporary={() => navigate(Routes.onboarding)}
       uid={uid}
       name={displayName}
       email={email}

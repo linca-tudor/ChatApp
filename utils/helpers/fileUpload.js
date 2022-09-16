@@ -8,6 +8,8 @@ const fileUpload = async (
   { onStart, onProgress, onComplete, onFail },
   path
 ) => {
+  storage.maxUploadRetryTime = 3000;
+
   const storageRef = ref(storage, `images/${path}/${uuidv4()}.jpg`);
 
   // Create file metadata including the content type
