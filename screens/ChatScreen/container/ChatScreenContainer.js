@@ -9,16 +9,20 @@ import {
   serverTimestamp,
   push,
   onValue,
+  update,
 } from 'firebase/database';
 import { database } from '../../../config/firebase';
-import { pickCameraImage } from '../../../utils/helpers/pickImage';
+import {
+  pickCameraImage,
+  pickGalleryImage,
+} from '../../../utils/helpers/pickImage';
 import { uuidv4 } from '@firebase/util';
 
 const ChatScreenContainer = () => {
-  const [pendingID, setPendingID] = useState('');
   const [messages, setMessages] = useState([]);
-  const [isUploading, setIsUploading] = React.useState(false);
-  const [progress, setProgress] = React.useState(0);
+  const [isUploading, setIsUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+
   const auth = getAuth();
   const { uid, photoURL, displayName } = auth.currentUser;
 
@@ -39,9 +43,25 @@ const ChatScreenContainer = () => {
 
   const appendMessage = (message) => {
     setMessages((previousMessages) => {
-      previousMessages?.filter((m) => m._id !== message._id);
       return GiftedChat.append(previousMessages, [message]);
     });
+  };
+
+  const deleteAppendedMessage = (messageID) => {
+    setMessages((previousMessages) => {
+      return previousMessages.filter((message) => message._id !== messageID);
+    });
+  };
+
+  const updadeMessage = (path, object) => {
+    const tempRef = ref(database, `messages/${path}`);
+    update(tempRef, object)
+      .then(() => {
+        console.log('Data updated');
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const uploadMessage = (messages) => {
@@ -54,16 +74,12 @@ const ChatScreenContainer = () => {
     messages.forEach((message) => {
       message.createdAt = serverTimestamp();
       message.sent = true;
+      message.received = true;
     });
     uploadMessage(messages);
   };
 
-  const setPendingIDState = async () => {
-    setPendingID(uuidv4());
-  };
-
-  const onStart = async (localURI) => {
-  await setPendingIDState;
+  const onStart = async (localURI, uuid) => {
     const message = {
       _id: uuid,
       text: '',
@@ -85,18 +101,21 @@ const ChatScreenContainer = () => {
   };
 
   const onComplete = useCallback(
-    (fileUrl) => {
+    (fileUrl, uuid) => {
       const message = {
         _id: uuid,
         createdAt: serverTimestamp(),
+        image: fileUrl,
+        sent: true,
+        received: true,
         user: {
           _id: uid,
           name: displayName,
           avatar: photoURL,
         },
-        image: fileUrl,
-        sent: true,
       };
+
+      deleteAppendedMessage(uuid);
       uploadMessage([message]);
       setIsUploading(false);
     },
@@ -114,7 +133,7 @@ const ChatScreenContainer = () => {
       messages={messages}
       onSendPress={onSendPress}
       onAttachPress={() =>
-        pickCameraImage(
+        pickGalleryImage(
           {
             onStart,
             onProgress,

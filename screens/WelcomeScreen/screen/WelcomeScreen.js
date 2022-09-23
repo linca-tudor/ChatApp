@@ -6,7 +6,8 @@ import Strings from '../../../assets/Strings';
 import Colors from '../../../assets/Colors';
 import Screen from '../../../components/Screen';
 
-const SCREEN_WIDTH = Dimensions.get('screen').width;
+const SCREEN_WIDTH = Dimensions.get('window').width;
+// const SCREEN_WIDTH = 500
 
 const WelcomeScreen = ({ imageSource, onSignInPress, onSignUpPress }) => {
   styles = getStyles();

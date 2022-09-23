@@ -13,9 +13,7 @@ const UserStack = () => {
   const { displayName, photoURL } = auth.currentUser;
 
   useEffect(() => {
-    if (true && !displayName && !photoURL) { // TODO: remove true when development is done
-      console.log('displayName is: ', displayName, '\n');
-      console.log('photoURL is: ', photoURL, '\n', '\n');
+    if (!displayName && !photoURL) {
       navigate(Routes.onboarding);
     }
   }, []);

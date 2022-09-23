@@ -18,8 +18,10 @@ const fileUpload = async (
     contentType: 'image/jpeg',
   };
 
+  const uuid = uuidv4()
+
   // Trigger file upload start event
-  onStart && onStart(localURI);
+  onStart && onStart(localURI, uuid);
   const uploadTask = uploadBytesResumable(storageRef, fileBlob, metadata);
   // Listen for state changes, errors, and completion of the upload.
   uploadTask.on(
@@ -42,7 +44,7 @@ const fileUpload = async (
       // Upload completed successfully, now we can get the download URL
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         console.log('File available at', downloadURL);
-        onComplete && onComplete(downloadURL);
+        onComplete && onComplete(downloadURL, uuid);
       });
     }
   );

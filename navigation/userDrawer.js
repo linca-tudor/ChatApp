@@ -7,7 +7,7 @@ import Colors from '../assets/Colors';
 import { Dimensions } from 'react-native';
 
 const Drawer = createDrawerNavigator();
-const SCREEN_WIDTH = Dimensions.get('screen').width;
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const UserDrawer = () => {
   const styles = getStyles();
