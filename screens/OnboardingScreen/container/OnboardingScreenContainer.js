@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import Strings from '../../../assets/Strings';
@@ -7,30 +8,74 @@ import {
   pickCameraImage,
   pickGalleryImage,
 } from '../../../utils/helpers/pickImage';
+import Routes from '../../../assets/Routes';
 
 const OnboardingScreenContainer = () => {
   const [error, setError] = useState('');
   const [name, setName] = useState('');
+  const [fileURL, setFileURL] = useState('');
+  const [photoURL, setPhotoURL] = useState('');
+  const [changeProfilePic, setChangeProfilePic] = useState(false);
   const [isUploading, setIsUploading] = React.useState(false);
   const [progress, setProgress] = React.useState(0);
   const auth = getAuth();
-  const { goBack } = useNavigation();
+  const navigation = useNavigation();
+  const { navigate, goBack } = navigation;
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setName(auth.currentUser.displayName);
+      setPhotoURL(auth.currentUser.photoURL);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  const updateUserInfo = async (name) => {
+    if (changeProfilePic) {
+      updateProfile(auth.currentUser, { photoURL: fileURL });
+    } else if (auth.currentUser.photoURL === '') {
+      updateProfile(auth.currentUser, {
+        photoURL: Strings.onboarding.profilePlaceholder,
+      });
+    }
+
+    if (name === '') {
+      Alert.alert('Oops!', 'You forgot to enter your name', [
+        {
+          text: 'Set Name',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: 'Use e-mail Address',
+          onPress: async () => {
+            const email = auth.currentUser.email;
+            const extractedName = email.substring(0, email.lastIndexOf('@'));
+            setName(extractedName);
+            await updateDisplayName(extractedName);
+            setTimeout(() => {
+              goBack();
+            }, 500);
+          },
+        },
+      ]);
+    } else {
+      await updateDisplayName(name);
+      goBack();
+    }
+  };
 
   const updateDisplayName = async (name) => {
-    if (name === '') {
-      setError(Strings.onboarding.emptyNameErr);
-      return;
-    }
     try {
       await updateProfile(auth.currentUser, { displayName: name });
-      goBack();
       setError('');
     } catch (error) {
       setError(error.message);
     }
   };
 
-  const onStart = () => {
+  const onStart = (localURI, uuid) => {
     setIsUploading(true);
   };
 
@@ -38,21 +83,23 @@ const OnboardingScreenContainer = () => {
     setProgress(progress);
   };
 
-  const onComplete = (fileUrl) => {
-    updateProfile(auth.currentUser, { photoURL: fileUrl }).then(() => {
-      setIsUploading(false);
-    });
+  const onComplete = (fileUrl, uuid) => {
+    setFileURL(fileUrl);
+    setIsUploading(false);
+    setChangeProfilePic(true);
   };
 
   const onFail = (error) => {
-    console.log(('File Upload Error is: ', error));
-    setError(error);
+    if (error == 'storage/retry-limit-exceeded') setError(error);
     setIsUploading(false);
   };
 
   return (
     <OnboardingScreen
-      onSavePress={() => updateDisplayName(name)}
+      onSavePress={() => updateUserInfo(name)}
+      onCancelPress={() => {
+        goBack();
+      }}
       onPickImagePress={() =>
         pickGalleryImage(
           {
@@ -78,7 +125,7 @@ const OnboardingScreenContainer = () => {
       onTextUpdate={(name) => setName(name)}
       err={error}
       txt={name}
-      image={auth.currentUser.photoURL}
+      photoURL={auth.currentUser.photoURL}
     />
   );
 };

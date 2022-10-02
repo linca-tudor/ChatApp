@@ -37,7 +37,6 @@ const fileUpload = async (
     },
     (error) => {
       // Something went wrong - dispatch onFail event with error  response
-      console.log('Upload from fileUpload.js failer', error);
       onFail && onFail(error);
     },
     () => {

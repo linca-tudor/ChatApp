@@ -30,16 +30,18 @@ const getStyles = () => {
       fontSize: 15,
     },
     alreadyRegisteredContainer: {
-      marginTop: 'auto',
+      flexGrow: 1,
       marginBottom: 20,
       flexDirection: 'row',
       justifyContent: 'center',
     },
     alreadyRegisteredText: {
+      marginTop: 'auto',
       fontSize: 16,
       marginRight: 5,
     },
     alreadyRegisteredRoute: {
+      marginTop: 'auto',
       fontSize: 16,
       fontWeight: '600',
       color: Colors.ultramarineBlue,

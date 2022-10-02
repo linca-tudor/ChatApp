@@ -5,6 +5,7 @@ import Colors from '../../assets/Colors';
 const getStyles = () => {
   return StyleSheet.create({
     button: {
+      width: '100%',
       backgroundColor: Colors.watermelon,
       padding: 5,
       borderRadius: 12.5,

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ChatScreen from '../screen';
 import { GiftedChat } from 'react-native-gifted-chat';
-import useAuthentication from '../../../utils/hooks';
 import { getAuth } from 'firebase/auth';
 import {
   ref,
@@ -16,7 +15,6 @@ import {
   pickCameraImage,
   pickGalleryImage,
 } from '../../../utils/helpers/pickImage';
-import { uuidv4 } from '@firebase/util';
 
 const ChatScreenContainer = () => {
   const [messages, setMessages] = useState([]);

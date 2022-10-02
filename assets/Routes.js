@@ -4,6 +4,8 @@ const Routes = {
   recoverPassword: 'RecoverPasword',
   userDrawer: 'UserDrawer',
   onboarding: 'Onboarding',
+  profile: 'Profile',
+  chat: 'Chat',
 };
 
 export default Routes;
