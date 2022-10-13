@@ -18,23 +18,23 @@ This app uses the following:
 
 - [ReactNative] - "An open source JavaScript Mobile framework specially designed to build native mobile apps for iOS and Android."
 - [Expo] - "Developer tooling and NPM libraries built on top of React-Native."
-- [Firebase API] - "The Firebase API provides tools to create, modify and authenticate user, as well as storing data on the firebase Real Time Database and Firebase Storage."
+- [FirebaseAPI] - "The Firebase API provides tools to create, modify and authenticate user, as well as storing data on the firebase Real Time Database and Firebase Storage."
 - [Watchman] - "It exists to watch files and record when they change."
 
 ## Installation
 
-NYTimesApp requires [Node.js](https://nodejs.org/) v16+ and [React.js](https://reactnative.dev/docs/0.68/environment-setup) v68.2 to run.
+ChatApp requires [Node.js](https://nodejs.org/) v16+ and [React.js](https://reactnative.dev/docs/0.68/environment-setup) v68.2 to run.
 
 Clone this repository
 
 ```sh
-gh repo clone https://github.com/linca-tudor/ChatAp
+gh repo clone https://github.com/linca-tudor/ChatApp
 ```
 
 Navigate to the folder where the repository has been cloned and install the dependencies and devDependencies
 
 ```sh
-cd nytimesapp
+cd chatappp
 npm i
 ```
 
@@ -181,7 +181,7 @@ As my first React Native project, the learning curve was steep. Altough many ste
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-   [NYTimesAPI]: <https://developer.nytimes.com/>
+   [FirebaseAPI]: <https://firebase.google.com/docs/reference/>
    [Expo]: <https://expo.dev/home>
    [node.js]: <http://nodejs.org>
    [ReactNative]: <https://reactnative.dev/>
