@@ -46,7 +46,7 @@ npm expo start
 
 ## Modules
 
-NYTimesApp is currently based on the following modules.
+ChatApp is currently based on the following modules.
 Instructions on how to use them in your own application are linked below.
 
 | Module | Documentation |
@@ -62,24 +62,24 @@ Instructions on how to use them in your own application are linked below.
 
 The [Homepage][Booklist] consists of a **SectionList** component that displays the bestselling books shown on New York Times. The data is fetched from the API, filtered to select only the Title, Author and Cover Photo from the server response.
 
-<img src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/Booklist.gif" width="300"/>
+<img src="https://media.tenor.com/KEzW7ALwfUAAAAAC/cat-what.gif" width="300"/>
 
 ### Book Details Screen
 
 Upon clicking on any SectionList item, the app will redirect the screen a [detailed view][Booklist2BookDetailsScreen] of the selected book. The data is filtered from the bestsellers list itself, this time also getting information regarding the book Description, and purchase links.
 
-<img src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/Booklist2BookDetailsScreen.gif" width="300"/>
+<img src="https://media.tenor.com/lL6gUPwa4aMAAAAd/cats-funny-cat.gif" width="300"/>
 
 The [purchase links][BuyLinks] are displayed using a **modal** that is triggered by the "Purchase Book" button. The modal itself renders a **Flatlist** component that offers pressable buttons which redirect the user to the respective URL.
 The redirect is managed by using the *openURL* method of the Linking core module.
 
-<img src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/BuyLinks.gif" width="300"/>
+<img src="https://media.tenor.com/7r-BGEoIohkAAAAd/meme-cat.gif" width="300"/>
 
 ### Search Screen
   
 On the second tab of the navigation menu a [Search Screen][Search] was implemented. It uses **SearchBar** component and a **Flatlist** component do display the search results. The Search Bar is implemented using a **TextInput** component such that when the user enters any characters in the text field, the state of the input field changes, and that triggers a search based on the typed characters. To limit the number of search requests, the function that handles the input update is being debounced using the similarily named method from the *"lodash"* module. 
   
-<img src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/Search.gif" width="300"/>
+<img src="https://media.tenor.com/zrpyKEyxZGwAAAAd/fat-cat-laser-eyes.gif" width="300"/>
   
 Similarly to the Homepage list items, the search results can also be clicked, revealing the detailed view for that particular result. 
   
@@ -87,7 +87,7 @@ Similarly to the Homepage list items, the search results can also be clicked, re
   
   The app uses a general **Tab** navigator, and each screen from the tab uses a **Stack** navigator. The tabs function as independent parts of the same app, the results or information displayed on one screen not being affected by changing said screen. 
 
-<img src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/ScreenIndependence.gif" width="300" />
+<img src="https://media.tenor.com/D0mk5R5x1G8AAAAd/cat-fat-cat.gif" width="300" />
   
 This is done by having in the App.js component the main *AppNavigation* functional component switching between the Stack navigator, as shown here:
   
