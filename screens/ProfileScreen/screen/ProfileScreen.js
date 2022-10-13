@@ -87,6 +87,9 @@ const ProfileScreen = ({
             />
           }
           text={Strings.profileScreen.copyright}
+          onPress={() => {
+            Linking.openURL('https://mit-license.org/');
+          }}
         />
       </View>
       <Button title="Sign Out" style={styles.button} onPress={onSignOutPress} />
