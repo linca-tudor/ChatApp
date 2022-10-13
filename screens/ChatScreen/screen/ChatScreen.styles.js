@@ -21,6 +21,13 @@ const getStyles = () => {
       shadowOffset: {
         height: 1,
       },
+      marginVertical: 8,
+    },
+    userName: {
+      fontSize: 16,
+      fontWeight: '600',
+      marginRight: 10,
+      marginBottom: 5,
     },
   });
 };

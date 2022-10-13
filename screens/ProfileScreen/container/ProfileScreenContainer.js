@@ -35,8 +35,6 @@ const ProfileScreenContainer = () => {
         const drawerState =
           getDrawerStatusFromState(navigation.getState()) === 'open';
         setIsDrawerOpen(drawerState);
-        console.log('drawerState is: ', drawerState);
-        console.log('isDrawerOpen is: ', isDrawerOpen);
       },
       [isDrawerOpen]
     );

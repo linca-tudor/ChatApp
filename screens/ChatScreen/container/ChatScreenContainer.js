@@ -7,8 +7,8 @@ import {
   onChildAdded,
   serverTimestamp,
   push,
-  onValue,
   update,
+  set,
 } from 'firebase/database';
 import { database } from '../../../config/firebase';
 import {
@@ -20,6 +20,7 @@ const ChatScreenContainer = () => {
   const [messages, setMessages] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const auth = getAuth();
   const { uid, photoURL, displayName } = auth.currentUser;
@@ -73,6 +74,7 @@ const ChatScreenContainer = () => {
       message.createdAt = serverTimestamp();
       message.sent = true;
       message.received = true;
+      message.text = message.text.trim();
     });
     uploadMessage(messages);
   };
@@ -92,6 +94,7 @@ const ChatScreenContainer = () => {
     };
     appendMessage(message);
     setIsUploading(true);
+    setIsModalVisible(false);
   };
 
   const onProgress = (progress) => {
@@ -130,8 +133,21 @@ const ChatScreenContainer = () => {
     <ChatScreen
       messages={messages}
       onSendPress={onSendPress}
-      onAttachPress={() =>
+      isModalVisible={isModalVisible}
+      setIsModalVisible={setIsModalVisible}
+      onPickImagePress={() =>
         pickGalleryImage(
+          {
+            onStart,
+            onProgress,
+            onComplete,
+            onFail,
+          },
+          'messages'
+        )
+      }
+      onOpenCameraPress={() =>
+        pickCameraImage(
           {
             onStart,
             onProgress,

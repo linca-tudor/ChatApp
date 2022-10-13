@@ -49,15 +49,16 @@ const Strings = {
       "You've refused to allow this app to access your camera!",
     refusedGalleryPersmission:
       "You've refused to allow this app to access your photos!",
-    profilePlaceholder:
-      'https://firebasestorage.googleapis.com/v0/b/chatapp-af6ec.appspot.com/o/images%2FprofilePic%2Fheadshot-silhouette-grey.jpeg?alt=media&token=97b1d751-ea71-4d74-820b-913bf6837d5b',
     usernameTextInputTitle: 'Full name',
     usernameTextInputEmail: 'Email',
   },
   profileScreen: {
-    termsCond: 'Terms and Conditions',
-    contact: 'Contact us',
-    privacy: 'Privacy Policy',
+    sourceCode: 'Source Code',
+    contact: 'Contact me',
+    copyright: 'Copyright',
+  },
+  chatScreen: {
+    you: 'you',
   },
 };
 

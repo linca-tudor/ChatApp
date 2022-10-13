@@ -18,6 +18,7 @@ const OnboardingScreenContainer = () => {
   const [changeProfilePic, setChangeProfilePic] = useState(false);
   const [isUploading, setIsUploading] = React.useState(false);
   const [progress, setProgress] = React.useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const auth = getAuth();
   const navigation = useNavigation();
   const { navigate, goBack } = navigation;
@@ -32,15 +33,9 @@ const OnboardingScreenContainer = () => {
   }, [navigation]);
 
   const updateUserInfo = async (name) => {
-    if (changeProfilePic) {
-      updateProfile(auth.currentUser, { photoURL: fileURL });
-    } else if (auth.currentUser.photoURL === '') {
-      updateProfile(auth.currentUser, {
-        photoURL: Strings.onboarding.profilePlaceholder,
-      });
-    }
+    console.log('updateUserInfo', name);
 
-    if (name === '') {
+    if (!name) {
       Alert.alert('Oops!', 'You forgot to enter your name', [
         {
           text: 'Set Name',
@@ -77,6 +72,7 @@ const OnboardingScreenContainer = () => {
 
   const onStart = (localURI, uuid) => {
     setIsUploading(true);
+    setIsModalVisible(false);
   };
 
   const onProgress = (progress) => {
@@ -97,6 +93,8 @@ const OnboardingScreenContainer = () => {
   return (
     <OnboardingScreen
       onSavePress={() => updateUserInfo(name)}
+      isModalVisible={isModalVisible}
+      setIsModalVisible={setIsModalVisible}
       onCancelPress={() => {
         goBack();
       }}

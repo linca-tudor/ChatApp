@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, Image, Modal } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Modal,
+  SafeAreaView,
+} from 'react-native';
 import Screen from '../../../components/Screen';
 import Colors from '../../../assets/Colors';
 import Strings from '../../../assets/Strings';
 import getStyles from './OnboardingScreen.styles';
-import TextInput from '../../../components/TextInput';
+import MediaUploadModal from '../../../components/MediaUploadModal';
 import Button from '../../../components/Button';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import TextInputIcon from '../../../components/TextInputIcon/TextInputIcon';
 
 const OnboardingScreen = ({
   onSavePress,
+  isModalVisible,
+  setIsModalVisible,
   onCancelPress,
   onPickImagePress,
   onOpenCameraPress,
@@ -21,8 +30,10 @@ const OnboardingScreen = ({
 }) => {
   const [text, setText] = useState('');
   const [error, setError] = useState('');
-  const [modalVisible, setModalVisible] = useState(false);
   const styles = getStyles();
+  const imageSource = photoURL
+    ? { uri: photoURL }
+    : require('../../../assets/images/userPhotoPlaceholder.jpeg');
 
   useEffect(() => {
     setError(err);
@@ -37,58 +48,20 @@ const OnboardingScreen = ({
             <Text style={styles.errorText}>{error}</Text>
           </View>
         )}
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <TouchableOpacity
-            style={styles.centeredView}
-            onPress={() => {
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.modalView}>
-              <TouchableOpacity
-                style={[styles.button, styles.button]}
-                onPress={onOpenCameraPress}
-              >
-                <MaterialCommunityIcons
-                  name="camera"
-                  size={24}
-                  color={Colors.white}
-                  style={styles.iconStyle}
-                />
-                <Text style={styles.textStyle}>Take a photo</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.button, styles.button]}
-                onPress={onPickImagePress}
-              >
-                <AntDesign
-                  name="upload"
-                  size={24}
-                  color={Colors.white}
-                  style={styles.iconStyle}
-                />
-                <Text style={styles.textStyle}>Upload a photo</Text>
-              </TouchableOpacity>
-            </View>
-          </TouchableOpacity>
-        </Modal>
+        <MediaUploadModal
+          isModalVisible={isModalVisible}
+          setIsModalVisible={setIsModalVisible}
+          onCameraPress={onOpenCameraPress}
+          onGalleryPress={onPickImagePress}
+        />
         <View style={styles.imageContainer}>
           <TouchableOpacity
             onPress={() => {
-              setModalVisible(true);
+              setIsModalVisible(true);
             }}
           >
             <View style={[styles.imageContainer]}>
-              {photoURL && (
-                <Image source={{ uri: photoURL }} style={styles.image} />
-              )}
+              <Image source={imageSource} style={styles.image} />
               <View style={styles.frame} />
               <View style={styles.editIconContainer}>
                 <MaterialCommunityIcons

@@ -8,11 +8,11 @@ const getStyles = () => {
       flex: 1,
     },
     container: {
-      marginTop: 100,
       paddingHorizontal: 20,
       backgroundColor: Colors.lavenderMist,
     },
     imageContainer: {
+      marginTop: 50,
       alignItems: 'center',
     },
     editIconContainer: {
@@ -33,8 +33,7 @@ const getStyles = () => {
     image: {
       width: 160,
       height: 160,
-      borderRadius: 80,
-    },
+      borderRadius: 80,    },
     frame: {
       marginTop: -167.5,
       width: 175,
@@ -49,7 +48,8 @@ const getStyles = () => {
       alignItems: 'center',
     },
     welcomeMessage: {
-      fontSize: 16,
+      fontSize: 17,
+      fontWeight: '500',
       color: Colors.darkGrey,
       opacity: 0.9,
     },

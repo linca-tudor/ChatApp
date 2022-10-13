@@ -9,9 +9,11 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
   Feather,
+  AntDesign,
 } from '@expo/vector-icons';
 import Colors from '../../../assets/Colors';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { Linking } from 'react-native';
 
 const ProfileScreen = ({
   onSignOutPress,
@@ -24,6 +26,9 @@ const ProfileScreen = ({
   drawerState,
 }) => {
   const styles = getStyles();
+  const imageSource = photoURL
+    ? { uri: photoURL }
+    : require('../../../assets/images/userPhotoPlaceholder.jpeg');
 
   return (
     <View style={[styles.flex, styles.container]}>
@@ -41,7 +46,7 @@ const ProfileScreen = ({
       </SafeAreaView>
       <TouchableOpacity onPress={onProfileEditPress}>
         <View style={[styles.imageContainer]}>
-          <Image source={{ uri: photoURL }} style={styles.image} />
+          <Image source={imageSource} style={styles.image} />
           <View style={styles.frame} />
           <View style={styles.editIconContainer}>
             <MaterialCommunityIcons
@@ -60,16 +65,18 @@ const ProfileScreen = ({
         <ListItem
           icon={<Feather name="phone-call" size={23} color={Colors.darkGrey} />}
           text={Strings.profileScreen.contact}
+          onPress={() => {
+            Linking.openURL('mailto:mail.tudorlinca@gmail.com');
+          }}
         />
         <ListItem
           icon={
-            <MaterialIcons
-              name="my-library-books"
-              size={23}
-              color={Colors.darkGrey}
-            />
+            <AntDesign name="codesquare" size={23} color={Colors.darkGrey} />
           }
-          text={Strings.profileScreen.termsCond}
+          text={Strings.profileScreen.sourceCode}
+          onPress={() => {
+            Linking.openURL('https://github.com/linca-tudor/ChatApp.git');
+          }}
         />
         <ListItem
           icon={
@@ -79,7 +86,7 @@ const ProfileScreen = ({
               color={Colors.darkGrey}
             />
           }
-          text={Strings.profileScreen.privacy}
+          text={Strings.profileScreen.copyright}
         />
       </View>
       <Button title="Sign Out" style={styles.button} onPress={onSignOutPress} />
