@@ -88,7 +88,7 @@ const ProfileScreen = ({
           }
           text={Strings.profileScreen.copyright}
           onPress={() => {
-            Linking.openURL('https://mit-license.org/');
+            Linking.openURL('https://github.com/linca-tudor/ChatApp/blob/master/LICENSE');
           }}
         />
       </View>
