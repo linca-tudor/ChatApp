@@ -60,4 +60,4 @@ The app should now build successfully :D
 ## Important
 ### If you forked this project, or you use your own public version history system, make sure to add the **.env** file to the ignored files list. The Firebase security rules configured in the previous steps will allow any person with access to these keys to read and write data on the database until the timeframe expires (this includes sent messages, images and user credentials).
 
-If you wish to return to the Readme file, [click here](README.md#setting-up-firebase)
+If you wish to return to the Readme file, [click here](README.md#setting-up-firebase).
