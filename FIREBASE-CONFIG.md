@@ -58,7 +58,7 @@ Create a new **.env** file at the root of the project folder. This file will con
 Quick links: 
 - [Step 2](FIREBASE-CONFIG.md#step-2-create-a-new-app-within-the-project) and [Firebase SDK Config location](https://user-images.githubusercontent.com/37547839/202482228-051427bd-129a-4a08-904f-f8fd227be885.png)
 - [Step 4](FIREBASE-CONFIG.md#step-4-initialize-the-real-time-database) and [Real Time DB Link location](https://user-images.githubusercontent.com/37547839/202484236-db513f81-8d53-4068-be69-70a3c25fa77a.png)
-- [Step 5](FIREBASE-CONFIG.md##step-5-initialize-the-storage-bucket) and [Storage Bucket Link location](https://user-images.githubusercontent.com/37547839/202484622-1c2cf288-6c71-4890-a08d-293491bcf073.png)
+- [Step 5](FIREBASE-CONFIG.md#step-5-initialize-the-storage-bucket) and [Storage Bucket Link location](https://user-images.githubusercontent.com/37547839/202484622-1c2cf288-6c71-4890-a08d-293491bcf073.png)
 
 The app should now build successfully :D
 
