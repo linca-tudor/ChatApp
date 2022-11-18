@@ -66,8 +66,15 @@ Instructions on how to use them in your own application are linked below.
 
 ## Application Screens
 
-### Welcome screen
+### Welcome, Sign Up & Sign In Screen
 
+Unless there is an existend logged in user, this is the screen the app will display. It contains links to the Sign Up and Sign In screens. The **Password** field also features a hide text toggle button.
+
+<img src="https://user-images.githubusercontent.com/37547839/202610885-b4213eaa-b6a2-4c67-9f05-fb87687fdf21.png" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202615181-2fb2369c-b123-48c9-be7a-28ecd3e5ae69.gif" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202620069-8c78e13d-df8c-40fc-a10a-76edd9aab0e7.gif" width="248"/>
+
+From the Sign In screen it is also possible to opt for an account **passowrd reset**. It can be done as shown below, and a sample response from the server can be also seen below. The link will redirect the user to a webpage hosted by Firebase where the password can be reset.
+
+<img src="https://user-images.githubusercontent.com/37547839/202615631-2f57b470-4127-4e42-9e00-aff459cfe1da.gif" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202617481-04853bd4-0453-4cbb-a5a8-15bd72f5bd8e.png" width="752"/> 
 
 
 ### Chat Screen
@@ -103,34 +110,160 @@ Upon selection, the upload process will begin. Until the picture is uploaded to 
 
 The following example shows a user uploading a picture. Note the difference between the locally rendered placeholder, and the moment the picture is uploaded. That is also the moment when the other users see the image in the chat screen.
 
+<img src="https://user-images.githubusercontent.com/37547839/202612830-a2f971d6-14cc-4727-91f9-5c8b4cba9d43.gif" width="1000"/>
+
+### Profile Screen
+The Profile Screen features a minimalist UI, displaying:
+- A user profile picture, or a placeholder if no picture is uploaded
+- The user's name (if it is uploaded), and the e-mail address user for the account
+- A **Contact me** button that will redirect the user to the e-mail app with my contact address filled in
+- A **Source Code** button that will redirect the user to this repo
+- A **Copyright** button that will redirect the user to the License File associated with this project
+
+When the uses taps on the profile picture (or the placeholder) the app will redirect to the editing screen. Here the user can choose a new profile picture, and a new name. The dislplay name field come prefilled with the current name save on the database. If there is no text when the **Save** button is pressed, an alert will pop up, giving the user the following choices:
+- Use the name from the e-mail as display name; this is automatically extracted from the e-mail address using the following bit of code:
+  ```javascript
+  const email = auth.currentUser.email;
+  const extractedName = email.substring(0, email.lastIndexOf('@'));
+  setName(extractedName);
+  ```
+- Set a display name manually; this will close the alert and will let the user to input text in the field again
+
+These features are shown in the following images: 
+
+<img src="https://user-images.githubusercontent.com/37547839/202626592-88f07f45-f7e5-4199-aa05-b15ccb8e234f.png" width="248" /> <img src="https://user-images.githubusercontent.com/37547839/202628506-a9e1d496-f51d-4e70-990f-8a09819b06f3.gif" width="248" /> <img src="https://user-images.githubusercontent.com/37547839/202628516-c084ddd7-d53d-4a08-a2d5-22e253b87317.gif" width="248" />
+
+## Core Mechanics
+
+### Authentication and Navigation Routes
+The authentication process uses [Firebase Auth SDK](https://firebase.google.com/docs/reference/js/v8/firebase.auth). The process is managed by a watcher that will check for any change in the current user state.
+
+```javascript
+const useAuthentication = () => {
+  const [user, setUser] = useState();
+  const [loading, setLoading] = useState(true);
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribeFromAuthStatuChanged = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        setUser(user);
+      } else {
+        // User is signed out
+        setUser(undefined);
+      }
+      setLoading(false);
+    });
+
+    return unsubscribeFromAuthStatuChanged;
+  }, []);
+
+  return {
+    user,
+    loading,
+  };
+};
+```
+
+This authentication state is constantly monitored, such that the main app navigator shows the appropriate navigation stack to the user:
+- When there is no user currently logged in, the Welcome/Sign In/Sign Up navigation stack is called
+- When there is a user currently logged in, the Profile/Chat navigation stack is called. 
+
+The following ```<RootNavigator>``` handles this process as follows:
+
+```javascript
+const RootNavigation = () => {
+  const { user, loading } = useAuthentication();
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  return user ? <UserStack /> : <AuthStack />;
+};
+```
+
+Furthermore, all user-related data interactions (such as setting/updating names and profile pictures) are also handled by Firebase Auth. Media storage is not included here.
+
+### Real Time Database vs. Storage Bucket
+
+Right now, the storage structure looks like this:
+
+| Storage Bucket Stores | Real Time Database Stores|
+| :------------: | :----------------: |
+| User profile pictures| Users Objects|
+| Message Attachments (Images)| Message Objects|
+
+A user object looks like this: 
+
+```json
+{
+   "_id":"7oikS5AkIQTDAQBlzqbfGSylyKr2",
+   "avatar":"link from Storage Bucket",
+   "name":"Francesca Collin"
+}
+```
+
+A text message object includes a user object and looks like this:
+
+```json
+{
+   "_id":"bb53a94e-aa07-46b4-8d8c-5c0bcab52346",
+   "createdAt":1667128020987,
+   "received":true,
+   "sent":true,
+   "text":"Yeah count me in.",
+   "user":{
+      "_id":"7oikS5AkIQTDAQBlzqbfGSylyKr2",
+      "avatar":"link from Storage Bucket",
+      "name":"Francesca Collin"
+   }
+}
+```
+
+A simple image sent in chat looks like this:
+
+```json
+{
+   "_id":"7cab2a4d-0f6a-4ead-851d-0fa6216ff499",
+   "createdAt":1668437501234,
+   "image":"link from Storage Bucket",
+   "received":true,
+   "sent":true,
+   "user":{
+      "_id":"ZdpStKCsKbUyhpo4wpWuQdohZCD2",
+      "avatar":"another link from Storage Bucked",
+      "name":"Beatriz Bridges"
+   }
+}
+```
+
+Firebase Real Time Database is the main DB that will store all the messages and users, keeping track of their respective IDs.
+Storage Bucket is simply a server space where all media is dumped. Where each piece of media belongs is handled by the Real Time Database.
 
 
-
-
-
-
-
-
-
-
-  
 ## Further improvements
   
-### Sharing and *deep links*
+### Error handling with Firebase
   
-Right now the app only manages hyperlinks from within the app to the outside world. It would be a great thing to implement a share button that cand generate a *deep link* that would enable the person that has been sent a particular book link to open the app and automaticallt navigate to said book
+Currently there are some basic error check being made, such as those for incorrect credentials or file upload, but they can be further improved by displaying the errors in a formatted way, filtering the error codes. Furthermore, ways to correct these errors could be implemented (such as prompts to reupload media, or resend messages).
 
-### Caching fetched data
+### Support for more attachment types
  
-Currently, every time data is needed a *fetch()* is called. During the app development I discovered that the NY Times API recommends a sleep period of 6 seconds beteween calls to ensure that the request quota per 60 seconds is not exceeded. Although the input text handler function is debounced using lodash.debounce, there still are occasions where the app becomes unresponsivness due to the server refusing to answer requests. A method for caching the fetched data and only refreshing it on manual refresh gesture and app restart neets to be implemented. This way the search field can also be sped up, thus providing a more fluid user experience.
+Right now only pictures can be sent via chat. Voice memos and videos would a at least two additions to the list, bringing this project closer to real-world implementations.
+
+### Separate chatrooms
+
+At the moment, the app only supports a single groupchat. Because the entire app is built around user IDs and message IDs, it could be fairly easy to implement a separate chat functionality.
 
 ## Conclusions
 
-As my first React Native project, the learning curve was steep. Altough many steps along the way proved to be fairly intuitive, the development process has not taken place without certain insecure moments. Following this project I am planning to work more to further increase the depth of my knowledge in the following areas of interest: 
- - Passing data from one component to another using *Props*
- - Component *State* and proper component lifecycle management (*useRef, useState, useEffect, useCallback*) 
- - File structure and naming convention
- - Separating function from interface; logic should not be done in visual components
+As my second React Native project, during the development process I started to understand the core concepts of React with more ease. The biggest realisation was how trully flexible the development process is when one is working with well-made libraries and modules that are made to be built upon. I am confident that this new approach to coding, especially to writing reactive code only represents the beginning. Still, moving forward I am actively seeking to improve on the following:
+ - File versioning with *Github* (separate, feature-based branches that are merged after a review process)
+ - Building more reusable components from the get go
+ - Proper state management, as components are starting to increase in complexity (Context API and Hooks, Redux, etc)
   
   
 
