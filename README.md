@@ -68,9 +68,7 @@ Instructions on how to use them in your own application are linked below.
 
 ### Welcome screen
 
-The [Homepage][Booklist] consists of a **SectionList** component that displays the bestselling books shown on New York Times. The data is fetched from the API, filtered to select only the Title, Author and Cover Photo from the server response.
 
-<img src="https://media.tenor.com/KEzW7ALwfUAAAAAC/cat-what.gif" width="300"/>
 
 ### Chat Screen
 
@@ -78,16 +76,6 @@ After a successful login the app displays the chat screen. This screen has the f
 
 #### The Chat Bubbles Area
 This element has a central view which contains all the sent messages. Messages sent by other users are shown on the left side, while messages sent by the current user are displayed on the right side. The messages sent by the current user do not have the username displayed, and for the other messages the username is only shown if the messages belong to different users (the name does not repeat for each message)
-
-#### The Text Input Area
-The text input area has three main components:
-- The text input field
-- The **Send** button
-- Media attachment button
-
-The **Send** is only shown if there is any text inside the input field, and it's appearance is animated using React Reanimated.
-
-<img src="https://user-images.githubusercontent.com/37547839/202601641-6973cc6a-cadd-4026-9486-982bafe72ae3.gif" width="500"/>
 
 The following images show how the chat screen looks from the perspective of the four different users in this conversation:
 
@@ -99,6 +87,21 @@ Depending on the upload time of the messages, the timestamp is displayed in one 
 - "Yesterday" for messages sent during the previous day
 - "Today" for messages sent during the current day
 
+#### The Text Input Area
+The text input area has three main components:
+- The text input field
+- The **Send** button
+- The **attachment** button
+
+The **Send** is only shown if there is any text inside the input field, and it's appearance is animated using React Reanimated.
+
+<img src="https://user-images.githubusercontent.com/37547839/202601641-6973cc6a-cadd-4026-9486-982bafe72ae3.gif" width="500"/>
+
+The **attachment** button shows upon click a Modal that let's the user to upload a picture either by taking a picture, or by selecting one from the device's photo gallery.
+
+Upon selection, the upload process will begin. Until the picture is uploaded to the server, a local placeholder is shown, and the chat image will have a *pending* status indicator. When the upload is completed, the local placeholder is replaced by the server image with a  corresponding *completed* status indicator (two checkmarks).
+
+The following example shows a user uploading a picture. Note the difference between the locally rendered placeholder, and the moment the picture is uploaded. That is also the moment when the other users see the image in the chat screen.
 
 
 
@@ -110,97 +113,6 @@ Depending on the upload time of the messages, the timestamp is displayed in one 
 
 
 
-
-
-
-The [purchase links][BuyLinks] are displayed using a **modal** that is triggered by the "Purchase Book" button. The modal itself renders a **Flatlist** component that offers pressable buttons which redirect the user to the respective URL.
-The redirect is managed by using the *openURL* method of the Linking core module.
-
-<img src="https://media.tenor.com/7r-BGEoIohkAAAAd/meme-cat.gif" width="300"/>
-
-### Search Screen
-  
-On the second tab of the navigation menu a [Search Screen][Search] was implemented. It uses **SearchBar** component and a **Flatlist** component do display the search results. The Search Bar is implemented using a **TextInput** component such that when the user enters any characters in the text field, the state of the input field changes, and that triggers a search based on the typed characters. To limit the number of search requests, the function that handles the input update is being debounced using the similarily named method from the *"lodash"* module. 
-  
-<img src="https://media.tenor.com/zrpyKEyxZGwAAAAd/fat-cat-laser-eyes.gif" width="300"/>
-  
-Similarly to the Homepage list items, the search results can also be clicked, revealing the detailed view for that particular result. 
-  
-  ## Navigation
-  
-  The app uses a general **Tab** navigator, and each screen from the tab uses a **Stack** navigator. The tabs function as independent parts of the same app, the results or information displayed on one screen not being affected by changing said screen. 
-
-<img src="https://media.tenor.com/D0mk5R5x1G8AAAAd/cat-fat-cat.gif" width="300" />
-  
-This is done by having in the App.js component the main *AppNavigation* functional component switching between the Stack navigator, as shown here:
-  
-```javascript
-const Tab = createBottomTabNavigator();
-export const AppNavigator = () => (
-<Tab.Navigator 
-/* Tab.Navigator options and styling */
->
-  <Tab.Screen name="Booklist" component={BookListNavigator} />
-  <Tab.Screen name="Search" component={SearchScreenNavigator} />
-</Tab.Navigator>
- );
-```
-  Each screen has then their own internal navigator:
-  
-  ### Homepage (BookList) 
-  
-  ```javascript
-const Stack = createStackNavigator();
-<Stack.Navigator
-  initialRouteName={Routes.BookListScreen}
-  /* Options */
->
-  <Stack.Screen
-    name={Routes.BookListScreen}
-    component={BookListScreen}
-    /* Options */
-  />
-  <Stack.Screen
-    name={Routes.BookDetailsScreen}
-    component={BookDetails}
-    /* Options */
-  />
-</Stack.Navigator>;
-  ```
-  
-  ### Search
-  
-  ```javascript
-const Stack = createStackNavigator();
-<Stack.Navigator
-  initialRouteName={Routes.SearchScreen}
-  /* Options */
->
-  <Stack.Screen
-    name={Routes.SearchScreen}
-    component={SearchScreen}
-    /* Options */
-  />
-  <Stack.Screen
-    name={Routes.BookDetailsScreen}
-    component={BookDetails}
-    /* Options */
-  />
-</Stack.Navigator>;
-  ```
-  
-## User Experience
-  
-  To make the user experience as seamless as possible, there have been implemented placeholder visual elements to aid the user to better navigate to the wished screen and/or action. Such elements are: 
-  
-  - gradients at list end to suggest scrolling
-  - search file icon to suggest that searching happens in that screen
-  - missing file icons when search returns no result
-  - loading animation when fetching data
-  
-  | Homepage Loading Animation | Element Loading Animation | Search Bar Interaction |
-  | :------------------------: | :-----------------------: | :--------------------: |
-  | <img style="display: block; margin-left: auto; margin-right: auto; width: 250" src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/LoadingBooklist.gif"/> | <img style="display: block; margin-left: auto; margin-right: auto; width: 250" src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/LoadingAnimation.gif"/> | <img style="display: block; margin-left: auto; margin-right: auto; width: 250" src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/SearchBarCloseButton.gif"/> |
   
 ## Further improvements
   
