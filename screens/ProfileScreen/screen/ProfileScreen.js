@@ -30,6 +30,7 @@ const ProfileScreen = ({
     ? { uri: photoURL }
     : require('../../../assets/images/userPhotoPlaceholder.jpeg');
 
+  console.log(photoURL);
   return (
     <View style={[styles.flex, styles.container]}>
       <SafeAreaView style={styles.drawerButton}>
@@ -58,12 +59,12 @@ const ProfileScreen = ({
         </View>
       </TouchableOpacity>
       <View style={styles.textContainer}>
-        <Text style={styles.userName}>{name}</Text>
+        {name && <Text style={styles.userName}>{name}</Text>}
         <Text style={styles.email}>{email}</Text>
       </View>
       <View style={styles.listContainer}>
         <ListItem
-          icon={<Feather name="phone-call" size={23} color={Colors.darkGrey} />}
+          icon={<Feather name="mail" size={23} color={Colors.darkGrey} />}
           text={Strings.profileScreen.contact}
           onPress={() => {
             Linking.openURL('mailto:mail.tudorlinca@gmail.com');
@@ -88,7 +89,9 @@ const ProfileScreen = ({
           }
           text={Strings.profileScreen.copyright}
           onPress={() => {
-            Linking.openURL('https://github.com/linca-tudor/ChatApp/blob/master/LICENSE');
+            Linking.openURL(
+              'https://github.com/linca-tudor/ChatApp/blob/master/LICENSE'
+            );
           }}
         />
       </View>

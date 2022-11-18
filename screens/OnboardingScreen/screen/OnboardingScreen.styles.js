@@ -48,6 +48,8 @@ const getStyles = () => {
       alignItems: 'center',
     },
     welcomeMessage: {
+      width: '100%',
+      textAlign: 'center',
       fontSize: 17,
       fontWeight: '500',
       color: Colors.darkGrey,

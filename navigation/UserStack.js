@@ -28,8 +28,11 @@ const UserStack = () => {
         headerTitle: '',
       }}
     >
-      <Stack.Screen name="UserDrawer" component={UserDrawer} />
-      <Stack.Screen name="Onboarding" component={OnboardingScreenContainer} />
+      <Stack.Screen name={Routes.userDrawer} component={UserDrawer} />
+      <Stack.Screen
+        name={Routes.onboarding}
+        component={OnboardingScreenContainer}
+      />
     </Stack.Navigator>
   );
 };

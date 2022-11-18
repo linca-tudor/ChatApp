@@ -32,11 +32,13 @@ const getStyles = () => {
       justifyContent: 'center',
     },
     notRegisteredText: {
+      width: 140,
       marginTop: 'auto',
       fontSize: 16,
       marginRight: 5,
     },
     notRegisteredRoute: {
+      width: 101,
       marginTop: 'auto',
       fontSize: 16,
       fontWeight: '600',

@@ -18,7 +18,7 @@ const fileUpload = async (
     contentType: 'image/jpeg',
   };
 
-  const uuid = uuidv4()
+  const uuid = uuidv4();
 
   // Trigger file upload start event
   onStart && onStart(localURI, uuid);
@@ -30,7 +30,7 @@ const fileUpload = async (
       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
-      console.log('Upload progress is: ', progress);
+      // console.log('Upload progress is: ', progress);
 
       // Monitor uploading progress
       onProgress && onProgress(Math.fround(progress).toFixed(2));
@@ -42,7 +42,7 @@ const fileUpload = async (
     () => {
       // Upload completed successfully, now we can get the download URL
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        console.log('File available at', downloadURL);
+        // console.log('File available at', downloadURL);
         onComplete && onComplete(downloadURL, uuid);
       });
     }

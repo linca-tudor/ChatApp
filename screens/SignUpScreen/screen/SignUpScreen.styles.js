@@ -36,11 +36,13 @@ const getStyles = () => {
       justifyContent: 'center',
     },
     alreadyRegisteredText: {
+      width: 145,
       marginTop: 'auto',
       fontSize: 16,
       marginRight: 5,
     },
     alreadyRegisteredRoute: {
+      width: 53,
       marginTop: 'auto',
       fontSize: 16,
       fontWeight: '600',

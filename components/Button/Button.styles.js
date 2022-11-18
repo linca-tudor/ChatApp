@@ -14,6 +14,8 @@ const getStyles = () => {
       justifyContent: 'center',
     },
     text: {
+      width: '100%',
+      textAlign: 'center',
       fontSize: Platform.OS === 'android' ? 16 : 19,
       fontWeight: '600',
       color: Colors.white,

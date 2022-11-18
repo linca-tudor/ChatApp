@@ -31,7 +31,9 @@ const WelcomeScreen = ({ imageSource, onSignInPress, onSignUpPress }) => {
             { marginRight: -25, backgroundColor: Colors.white, width: 150 },
           ]}
         >
-          <Text style={styles.buttonText}>Register</Text>
+          <Text style={styles.buttonText}>
+            {Strings.welcome.buttonTitleLeft}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={onSignInPress}
@@ -40,7 +42,9 @@ const WelcomeScreen = ({ imageSource, onSignInPress, onSignUpPress }) => {
             { borderLeftWidth: 0, paddingLeft: 25, width: 160 },
           ]}
         >
-          <Text style={styles.buttonText}>Sign In</Text>
+          <Text style={styles.buttonText}>
+            {Strings.welcome.buttonTitleRight}
+          </Text>
         </TouchableOpacity>
       </View>
     </Screen>

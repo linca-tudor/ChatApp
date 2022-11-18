@@ -1,4 +1,5 @@
 const Routes = {
+  welcome: 'Welcome',
   signIn: 'SignIn',
   signUp: 'SignUp',
   recoverPassword: 'RecoverPasword',

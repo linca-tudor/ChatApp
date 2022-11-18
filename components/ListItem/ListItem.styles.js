@@ -15,9 +15,9 @@ const getStyles = () => {
       borderBottomWidth: 1,
     },
     text: {
+      flexGrow: 1,
       fontSize: 16,
       marginLeft: 7.5,
-    //   flex: 1,
     },
     flex: {
       flex: 1,

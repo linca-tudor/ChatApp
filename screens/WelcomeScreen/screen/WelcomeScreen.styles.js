@@ -41,7 +41,10 @@ const getStyles = () => {
       borderColor: 'white',
     },
     buttonText: {
-      fontSize: 15,
+      width: '100%',
+      textAlign: 'center',
+      textAlignVertical: 'center',
+      fontSize: 16,
       fontWeight: '800',
       letterSpacing: 1,
     },

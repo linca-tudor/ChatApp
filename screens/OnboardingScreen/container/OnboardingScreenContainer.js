@@ -9,6 +9,7 @@ import {
   pickGalleryImage,
 } from '../../../utils/helpers/pickImage';
 import Routes from '../../../assets/Routes';
+import { StringFormat } from 'firebase/storage';
 
 const OnboardingScreenContainer = () => {
   const [error, setError] = useState('');
@@ -16,8 +17,8 @@ const OnboardingScreenContainer = () => {
   const [fileURL, setFileURL] = useState('');
   const [photoURL, setPhotoURL] = useState('');
   const [changeProfilePic, setChangeProfilePic] = useState(false);
-  const [isUploading, setIsUploading] = React.useState(false);
-  const [progress, setProgress] = React.useState(0);
+  const [isUploading, setIsUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const auth = getAuth();
   const navigation = useNavigation();
@@ -33,30 +34,33 @@ const OnboardingScreenContainer = () => {
   }, [navigation]);
 
   const updateUserInfo = async (name) => {
-    console.log('updateUserInfo', name);
-
     if (!name) {
-      Alert.alert('Oops!', 'You forgot to enter your name', [
-        {
-          text: 'Set Name',
-          onPress: () => {},
-          style: 'cancel',
-        },
-        {
-          text: 'Use e-mail Address',
-          onPress: async () => {
-            const email = auth.currentUser.email;
-            const extractedName = email.substring(0, email.lastIndexOf('@'));
-            setName(extractedName);
-            await updateDisplayName(extractedName);
-            setTimeout(() => {
-              goBack();
-            }, 500);
+      Alert.alert(
+        Strings.onboarding.emptyNameAlertTitle,
+        Strings.onboarding.emptyNameAlertSubtitle,
+        [
+          {
+            text: Strings.onboarding.setName,
+            onPress: () => {},
+            style: 'cancel',
           },
-        },
-      ]);
+          {
+            text: Strings.onboarding.useEmail,
+            onPress: async () => {
+              const email = auth.currentUser.email;
+              const extractedName = email.substring(0, email.lastIndexOf('@'));
+              setName(extractedName);
+              await updateDisplayName(extractedName);
+              setTimeout(() => {
+                goBack();
+              }, 500);
+            },
+          },
+        ]
+      );
     } else {
       await updateDisplayName(name);
+      if (changeProfilePic) await updateProfilePicture(fileURL);
       goBack();
     }
   };
@@ -64,6 +68,15 @@ const OnboardingScreenContainer = () => {
   const updateDisplayName = async (name) => {
     try {
       await updateProfile(auth.currentUser, { displayName: name });
+      setError('');
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const updateProfilePicture = async (avatar) => {
+    try {
+      await updateProfile(auth.currentUser, { photoURL: avatar });
       setError('');
     } catch (error) {
       setError(error.message);
@@ -88,6 +101,7 @@ const OnboardingScreenContainer = () => {
   const onFail = (error) => {
     if (error == 'storage/retry-limit-exceeded') setError(error);
     setIsUploading(false);
+    setChangeProfilePic(false);
   };
 
   return (

@@ -114,12 +114,12 @@ const ChatScreen = ({
 
     return (
       <View style={styles.messageDateContainer}>
-        <Text>
+        <Text style={styles.messageDate}>
           {moment(currentMessage.createdAt).calendar(null, {
-            sameDay: '[Today]',
-            lastDay: '[Yesterday]',
-            lastWeek: 'dddd',
-            sameElse: 'D MMM',
+            sameDay: ' [Today] ',
+            lastDay: ' [Yesterday] ',
+            lastWeek: ' dddd ',
+            sameElse: ' D MMM yyyy  ',
           })}
         </Text>
       </View>
@@ -143,7 +143,9 @@ const ChatScreen = ({
           return (
             <View>
               {!sameUser && !isCurrentUserMessage && (
-                <Text style={styles.userName}>{currentMessage.user.name}</Text>
+                <Text style={styles.userName} numberOfLines={1}>
+                  {currentMessage.user.name}
+                </Text>
               )}
               <Bubble
                 {...bubbleProps}

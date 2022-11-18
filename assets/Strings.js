@@ -14,6 +14,8 @@ const Strings = {
     title: 'Say "hello" to a different messaging experience',
     subTitle:
       ' An unexpected focus on privacy, combined with all of the features you expect',
+    buttonTitleLeft: 'Register',
+    buttonTitleRight: 'Sign In',
   },
   signIn: {
     title: 'Hello Again!',
@@ -51,6 +53,10 @@ const Strings = {
       "You've refused to allow this app to access your photos!",
     usernameTextInputTitle: 'Full name',
     usernameTextInputEmail: 'Email',
+    emptyNameAlertTitle: 'Oops!',
+    emptyNameAlertSubtitle: 'You forgot to enter your name...',
+    setName: 'Set Name Manually',
+    useEmail: 'Use e-mail Address name',
   },
   profileScreen: {
     sourceCode: 'Source Code',

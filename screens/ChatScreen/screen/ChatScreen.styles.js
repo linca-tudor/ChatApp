@@ -23,7 +23,12 @@ const getStyles = () => {
       },
       marginVertical: 8,
     },
+    messageDate: {
+      textAlign: 'center',
+      // backgroundColor: 'magenta',
+    },
     userName: {
+      width: '100%',
       fontSize: 16,
       fontWeight: '600',
       marginRight: 10,

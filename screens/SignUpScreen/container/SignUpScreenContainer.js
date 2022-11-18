@@ -23,7 +23,6 @@ const SignUpScreenContainer = ({ navigation }) => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      console.log('SignUpScreen user: ', auth.currentUser);
       setError('');
     } catch (error) {
       console.log(error);

@@ -61,13 +61,18 @@ const getStyles = () => {
     textContainer: {
       alignItems: 'center',
       marginTop: 30,
+      width: '100%',
     },
     userName: {
+      width: '100%',
+      textAlign: 'center',
       fontSize: 18,
       fontWeight: 'bold',
       marginBottom: 7.5,
     },
     email: {
+      width: '100%',
+      textAlign: 'center',
       fontSize: 16,
       color: Colors.darkGrey,
     },
