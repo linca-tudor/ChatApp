@@ -86,7 +86,7 @@ This element has a central view which contains all the sent messages. Messages s
 
 The following images show how the chat screen looks from the perspective of the four different users in this conversation:
 
-<img src="https://user-images.githubusercontent.com/37547839/202598675-e837a3aa-510c-4a3c-9035-892595d2e013.png" width="245"/> <img src="https://user-images.githubusercontent.com/37547839/202598681-3248c909-c621-44b8-b24e-be1b5bbc2651.png" width="245"/> <img src="https://user-images.githubusercontent.com/37547839/202598690-1b97377d-29b1-4ee1-a4a0-501dcbae486a.png" width="245"/> <img src="https://user-images.githubusercontent.com/37547839/202598696-64697b81-67c9-4fbe-a2b0-4fc3348144e1.png" width="245"/>
+<img src="https://user-images.githubusercontent.com/37547839/202598675-e837a3aa-510c-4a3c-9035-892595d2e013.png" width="204"/> <img src="https://user-images.githubusercontent.com/37547839/202598681-3248c909-c621-44b8-b24e-be1b5bbc2651.png" width="204"/> <img src="https://user-images.githubusercontent.com/37547839/202598690-1b97377d-29b1-4ee1-a4a0-501dcbae486a.png" width="204"/> <img src="https://user-images.githubusercontent.com/37547839/202598696-64697b81-67c9-4fbe-a2b0-4fc3348144e1.png" width="204"/>
 
 Depending on the upload time of the messages, the timestamp is displayed in one of four ways:
 - Full date for messages older than a week
