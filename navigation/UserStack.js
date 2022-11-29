@@ -13,9 +13,7 @@ const UserStack = () => {
   const { displayName, photoURL } = auth.currentUser;
 
   useEffect(() => {
-    if (true && !displayName && !photoURL) { // TODO: remove true when development is done
-      console.log('displayName is: ', displayName, '\n');
-      console.log('photoURL is: ', photoURL, '\n', '\n');
+    if (!displayName && !photoURL) {
       navigate(Routes.onboarding);
     }
   }, []);
@@ -30,8 +28,11 @@ const UserStack = () => {
         headerTitle: '',
       }}
     >
-      <Stack.Screen name="UserDrawer" component={UserDrawer} />
-      <Stack.Screen name="Onboarding" component={OnboardingScreenContainer} />
+      <Stack.Screen name={Routes.userDrawer} component={UserDrawer} />
+      <Stack.Screen
+        name={Routes.onboarding}
+        component={OnboardingScreenContainer}
+      />
     </Stack.Navigator>
   );
 };

@@ -6,7 +6,8 @@ import Strings from '../../../assets/Strings';
 import Colors from '../../../assets/Colors';
 import Screen from '../../../components/Screen';
 
-const SCREEN_WIDTH = Dimensions.get('screen').width;
+const SCREEN_WIDTH = Dimensions.get('window').width;
+// const SCREEN_WIDTH = 500
 
 const WelcomeScreen = ({ imageSource, onSignInPress, onSignUpPress }) => {
   styles = getStyles();
@@ -30,7 +31,9 @@ const WelcomeScreen = ({ imageSource, onSignInPress, onSignUpPress }) => {
             { marginRight: -25, backgroundColor: Colors.white, width: 150 },
           ]}
         >
-          <Text style={styles.buttonText}>Register</Text>
+          <Text style={styles.buttonText}>
+            {Strings.welcome.buttonTitleLeft}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={onSignInPress}
@@ -39,7 +42,9 @@ const WelcomeScreen = ({ imageSource, onSignInPress, onSignUpPress }) => {
             { borderLeftWidth: 0, paddingLeft: 25, width: 160 },
           ]}
         >
-          <Text style={styles.buttonText}>Sign In</Text>
+          <Text style={styles.buttonText}>
+            {Strings.welcome.buttonTitleRight}
+          </Text>
         </TouchableOpacity>
       </View>
     </Screen>

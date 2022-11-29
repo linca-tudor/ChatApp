@@ -40,9 +40,6 @@ export default {
       firebaseStorageBucket: process.env.FIREBASE_STORAGE_BUCKET,
       firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
       firebaseAppId: process.env.FIREBASE_APP_ID,
-      eas: {
-        projectId: 'ee4dde93-0a5e-46f6-af38-fb176ecc33b6',
-      },
     },
     plugins: [
       [
@@ -54,7 +51,6 @@ export default {
             'The app accesses your photos to let you share them with your friends.',
         },
       ],
-      // '@react-native-firebase/app',
     ],
   },
 };

@@ -2,9 +2,10 @@ const Strings = {
   general: {
     email: 'email',
     password: 'password',
-    yourName:'Your name',
+    yourName: 'Your name',
     skip: 'Skip',
     save: 'Save',
+    cancel: 'Cancel',
     upload: 'Upload photo',
     takePhoto: 'Take a photo',
     openGallery: 'Open Photo Gallery',
@@ -13,6 +14,8 @@ const Strings = {
     title: 'Say "hello" to a different messaging experience',
     subTitle:
       ' An unexpected focus on privacy, combined with all of the features you expect',
+    buttonTitleLeft: 'Register',
+    buttonTitleRight: 'Sign In',
   },
   signIn: {
     title: 'Hello Again!',
@@ -41,12 +44,27 @@ const Strings = {
       'Please input the e-mail address to attempt password recovery',
   },
   onboarding: {
-    title: 'Enter your name!',
-    subTitle: 'This will be the name outher people will see',
+    welcomeMessage: 'Share a little bit about yourself',
     buttonTitle: 'Save',
     emptyNameErr: 'Please type your name',
-    refusedCameraPermission: 'You\'ve refused to allow this app to access your camera!',
-    refusedGalleryPersmission: 'You\'ve refused to allow this app to access your photos!',
+    refusedCameraPermission:
+      "You've refused to allow this app to access your camera!",
+    refusedGalleryPersmission:
+      "You've refused to allow this app to access your photos!",
+    usernameTextInputTitle: 'Full name',
+    usernameTextInputEmail: 'Email',
+    emptyNameAlertTitle: 'Oops!',
+    emptyNameAlertSubtitle: 'You forgot to enter your name...',
+    setName: 'Set Name Manually',
+    useEmail: 'Use e-mail Address name',
+  },
+  profileScreen: {
+    sourceCode: 'Source Code',
+    contact: 'Contact me',
+    copyright: 'Copyright',
+  },
+  chatScreen: {
+    you: 'you',
   },
 };
 

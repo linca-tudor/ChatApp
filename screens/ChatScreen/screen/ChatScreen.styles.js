@@ -1,15 +1,38 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
+import Colors from '../../../assets/Colors';
 
 const getStyles = () => {
   return StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
+    flex: {
+      flex: 1,
+    },
+    chatContaner: {
+      backgroundColor: 'white',
+    },
+    messageDateContainer: {
+      alignSelf: 'center',
+      justifyContent: 'center',
+      backgroundColor: Colors.titanWhite,
+      paddingHorizontal: 7.5,
+      paddingVertical: 3,
+      borderRadius: 15,
+      shadowColor: Colors.black,
+      shadowOpacity: 0.075,
+      shadowOffset: {
+        height: 1,
       },
-    button: {
-      marginTop: 10,
+      marginVertical: 8,
+    },
+    messageDate: {
+      textAlign: 'center',
+      // backgroundColor: 'magenta',
+    },
+    userName: {
+      width: '100%',
+      fontSize: 16,
+      fontWeight: '600',
+      marginRight: 10,
+      marginBottom: 5,
     },
   });
 };

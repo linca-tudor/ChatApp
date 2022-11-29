@@ -1,89 +1,143 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import Strings from '../../../assets/Strings';
 import OnboardingScreen from '../screen/OnboardingScreen';
-import * as ExpoImagePicker from 'expo-image-picker';
+import {
+  pickCameraImage,
+  pickGalleryImage,
+} from '../../../utils/helpers/pickImage';
+import Routes from '../../../assets/Routes';
+import { StringFormat } from 'firebase/storage';
 
 const OnboardingScreenContainer = () => {
   const [error, setError] = useState('');
   const [name, setName] = useState('');
-  const [imagePath, setImagePath] = useState(null);
+  const [fileURL, setFileURL] = useState('');
+  const [photoURL, setPhotoURL] = useState('');
+  const [changeProfilePic, setChangeProfilePic] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const auth = getAuth();
-  const { goBack } = useNavigation();
+  const navigation = useNavigation();
+  const { navigate, goBack } = navigation;
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setName(auth.currentUser.displayName);
+      setPhotoURL(auth.currentUser.photoURL);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  const updateUserInfo = async (name) => {
+    if (!name) {
+      Alert.alert(
+        Strings.onboarding.emptyNameAlertTitle,
+        Strings.onboarding.emptyNameAlertSubtitle,
+        [
+          {
+            text: Strings.onboarding.setName,
+            onPress: () => {},
+            style: 'cancel',
+          },
+          {
+            text: Strings.onboarding.useEmail,
+            onPress: async () => {
+              const email = auth.currentUser.email;
+              const extractedName = email.substring(0, email.lastIndexOf('@'));
+              setName(extractedName);
+              await updateDisplayName(extractedName);
+              setTimeout(() => {
+                goBack();
+              }, 500);
+            },
+          },
+        ]
+      );
+    } else {
+      await updateDisplayName(name);
+      if (changeProfilePic) await updateProfilePicture(fileURL);
+      goBack();
+    }
+  };
 
   const updateDisplayName = async (name) => {
-    if (name === '') {
-      setError(Strings.onboarding.emptyNameErr);
-      return;
-    }
     try {
       await updateProfile(auth.currentUser, { displayName: name });
-      goBack();
       setError('');
     } catch (error) {
       setError(error.message);
     }
   };
 
-  const pickGalleryImage = async () => {
-    const permissionResult =
-      await ExpoImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      alert(Strings.onboarding.refusedGalleryPersmission);
-      return;
-    }
-
-    const result = await ExpoImagePicker.launchImageLibraryAsync({
-      mediaTypes: ExpoImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      allowsMultipleSelection: false,
-      aspect: [1, 1],
-      quality: 1,
-      selectionLimit: 1,
-    });
-
-    if (!result.cancelled) {
-      setImagePath(result.uri);
-      // console.log(result);
-      console.log(imagePath);
+  const updateProfilePicture = async (avatar) => {
+    try {
+      await updateProfile(auth.currentUser, { photoURL: avatar });
+      setError('');
+    } catch (error) {
+      setError(error.message);
     }
   };
 
-  const pickCameraImage = async () => {
-    const permissionResult =
-      await ExpoImagePicker.requestCameraPermissionsAsync();
+  const onStart = (localURI, uuid) => {
+    setIsUploading(true);
+    setIsModalVisible(false);
+  };
 
-    if (permissionResult.granted === false) {
-      alert(Strings.onboarding.refusedCameraPermission);
-      return;
-    }
+  const onProgress = (progress) => {
+    setProgress(progress);
+  };
 
-    const result = await ExpoImagePicker.launchCameraAsync({
-      mediaTypes: ExpoImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      allowsMultipleSelection: false,
-      aspect: [1, 1],
-      quality: 1,
-      selectionLimit: 1,
-    });
+  const onComplete = (fileUrl, uuid) => {
+    setFileURL(fileUrl);
+    setIsUploading(false);
+    setChangeProfilePic(true);
+  };
 
-    if (!result.cancelled) {
-      setImagePath(result.uri);
-      console.log(imagePath);
-    }
+  const onFail = (error) => {
+    if (error == 'storage/retry-limit-exceeded') setError(error);
+    setIsUploading(false);
+    setChangeProfilePic(false);
   };
 
   return (
     <OnboardingScreen
-      onSavePress={() => updateDisplayName(name)}
-      onPickImagePress={() => pickGalleryImage()}
-      onOpenCameraPress={() => pickCameraImage()}
+      onSavePress={() => updateUserInfo(name)}
+      isModalVisible={isModalVisible}
+      setIsModalVisible={setIsModalVisible}
+      onCancelPress={() => {
+        goBack();
+      }}
+      onPickImagePress={() =>
+        pickGalleryImage(
+          {
+            onStart,
+            onProgress,
+            onComplete,
+            onFail,
+          },
+          'profilePic'
+        )
+      }
+      onOpenCameraPress={() =>
+        pickCameraImage(
+          {
+            onStart,
+            onProgress,
+            onComplete,
+            onFail,
+          },
+          'profilePic'
+        )
+      }
       onTextUpdate={(name) => setName(name)}
       err={error}
       txt={name}
-      image={imagePath}
+      photoURL={auth.currentUser.photoURL}
     />
   );
 };

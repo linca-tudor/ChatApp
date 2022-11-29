@@ -9,11 +9,13 @@ const getStyles = () => {
       marginVertical: 60,
     },
     messageTitle: {
+      width: '100%',
       fontSize: 30,
       textAlign: 'center',
       marginBottom: 20,
     },
     messageSubtitle: {
+      width: '100%',
       fontSize: 18,
       textAlign: 'center',
     },
@@ -29,6 +31,7 @@ const getStyles = () => {
       alignItems: 'flex-end',
     },
     recoverPasswordText: {
+      width: 135,
       fontSize: 16,
     },
     button: {

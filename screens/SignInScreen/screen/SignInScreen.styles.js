@@ -26,16 +26,20 @@ const getStyles = () => {
       fontSize: 15,
     },
     notRegisteredContainer: {
-      marginTop: 'auto',
+      flexGrow: 1,
       marginBottom: 20,
       flexDirection: 'row',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     notRegisteredText: {
+      width: 140,
+      marginTop: 'auto',
       fontSize: 16,
       marginRight: 5,
     },
     notRegisteredRoute: {
+      width: 101,
+      marginTop: 'auto',
       fontSize: 16,
       fontWeight: '600',
       color: Colors.ultramarineBlue,

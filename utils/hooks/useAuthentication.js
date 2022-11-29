@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const useAuthentication = () => {
   const [user, setUser] = useState();
+  const [loading, setLoading] = useState(true);
   const auth = getAuth();
 
   useEffect(() => {
@@ -15,6 +16,7 @@ const useAuthentication = () => {
         // User is signed out
         setUser(undefined);
       }
+      setLoading(false);
     });
 
     return unsubscribeFromAuthStatuChanged;
@@ -22,6 +24,7 @@ const useAuthentication = () => {
 
   return {
     user,
+    loading,
   };
 };
 

@@ -14,10 +14,8 @@ const SignInScreen = ({
   passwordHiddenToggle,
   onBottomLinkPress,
 }) => {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('mail.tudorlinca+chatapp@gmail.com');
-  const [password, setPassword] = useState('123456789');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const styles = getStyles();
 

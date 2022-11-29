@@ -22,6 +22,7 @@ const TextInput = ({
         value={value}
         onChangeText={(text) => onTextUpdate(text)}
         secureTextEntry={secureText && isSecureTextHidden}
+        autoCapitalize="none"
         style={styles.text}
       />
       {secureText && (

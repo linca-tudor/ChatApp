@@ -1,7 +1,6 @@
 # ChatApp
 ## _This is an app that implements a chat using Gifted Chat_
 
-
 ## Features
 
 - Create and update your user
@@ -9,10 +8,9 @@
 - Send pictures on the chat
 - All the user, user data, messages and media files are hosted on Firebase
 
-NYTimesApp is a lightweight project that represents my first contact with the development process of a mobile app using the React Native Framework
-ChatApp is my second project using the React Native Framework, this time using more complex modules, such as [react-native-gifted-chat](https://github.com/FaridSafi/react-native-gifted-chat)
+ChatApp is my second project using the React Native Framework, this time using more complex modules, such as [react-native-gifted-chat](https://github.com/FaridSafi/react-native-gifted-chat) and the [Firebase API](https://firebase.google.com/docs/reference/).
 
-## Tech
+## Frameworks and libraries
 
 This app uses the following:
 
@@ -21,7 +19,7 @@ This app uses the following:
 - [FirebaseAPI] - "The Firebase API provides tools to create, modify and authenticate user, as well as storing data on the firebase Real Time Database and Firebase Storage."
 - [Watchman] - "It exists to watch files and record when they change."
 
-## Installation
+## Installing the app
 
 ChatApp requires [Node.js](https://nodejs.org/) v16+ and [React.js](https://reactnative.dev/docs/0.68/environment-setup) v68.2 to run.
 
@@ -38,7 +36,14 @@ cd chatappp
 npm i
 ```
 
-The server can now be started with:
+## Setting up Firebase
+
+To successfully build and use the app, Firebase SDKs must be initialised and included in the project. To do so, please follow the steps shown in the [Firebase Configuration Guide](FIREBASE-CONFIG.md).
+
+## Starting the app
+
+
+The app can be started by running the server with:
 
 ```sh
 npm expo start
@@ -50,132 +55,215 @@ ChatApp is currently based on the following modules.
 Instructions on how to use them in your own application are linked below.
 
 | Module | Documentation |
-| ------ | ------ |
-| expo-app-loading | [AppLoading][expo-app-loading] |
-| expo-font | [Font][expo-font] |
-| expo-linear-gradient | [LinearGradient][expo-linear-gradient] |
-| @react-navigation | [ReactNavigation][react-navigation] |
+| :------: | :------: |
+| expo-splash-screen | [Splashscreen][expo-splash-screen] |
+| expo-image-picker | [Image picker][expo-image-picker] |
+| firebase | [Firebase][firebase] |
+| lottie | [Android][lottie-react-native] or [iOS][lottie-ios]|
+| moment | [MomentJS Library][moment]|
+| react-native-gifted-chat | [Gifted Chat][react-native-gifted-chat] |
+| react-native-reanimated | [Reanimated][react-native-reanimated]|
 
 ## Application Screens
 
-### Homepage
+### Welcome, Sign Up & Sign In Screen
 
-The [Homepage][Booklist] consists of a **SectionList** component that displays the bestselling books shown on New York Times. The data is fetched from the API, filtered to select only the Title, Author and Cover Photo from the server response.
+Unless there is an existend logged in user, this is the screen the app will display. It contains links to the Sign Up and Sign In screens. The **Password** field also features a hide text toggle button.
 
-<img src="https://media.tenor.com/KEzW7ALwfUAAAAAC/cat-what.gif" width="300"/>
+<img src="https://user-images.githubusercontent.com/37547839/202610885-b4213eaa-b6a2-4c67-9f05-fb87687fdf21.png" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202615181-2fb2369c-b123-48c9-be7a-28ecd3e5ae69.gif" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202620069-8c78e13d-df8c-40fc-a10a-76edd9aab0e7.gif" width="248"/>
 
-### Book Details Screen
+From the Sign In screen it is also possible to opt for an account **passowrd reset**. It can be done as shown below, and a sample response from the server can be also seen below. The link will redirect the user to a webpage hosted by Firebase where the password can be reset.
 
-Upon clicking on any SectionList item, the app will redirect the screen a [detailed view][Booklist2BookDetailsScreen] of the selected book. The data is filtered from the bestsellers list itself, this time also getting information regarding the book Description, and purchase links.
+<img src="https://user-images.githubusercontent.com/37547839/202615631-2f57b470-4127-4e42-9e00-aff459cfe1da.gif" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202617481-04853bd4-0453-4cbb-a5a8-15bd72f5bd8e.png" width="752"/> 
 
-<img src="https://media.tenor.com/lL6gUPwa4aMAAAAd/cats-funny-cat.gif" width="300"/>
 
-The [purchase links][BuyLinks] are displayed using a **modal** that is triggered by the "Purchase Book" button. The modal itself renders a **Flatlist** component that offers pressable buttons which redirect the user to the respective URL.
-The redirect is managed by using the *openURL* method of the Linking core module.
+### Chat Screen
 
-<img src="https://media.tenor.com/7r-BGEoIohkAAAAd/meme-cat.gif" width="300"/>
+After a successful login the app displays the chat screen. This screen has the following elements:
 
-### Search Screen
-  
-On the second tab of the navigation menu a [Search Screen][Search] was implemented. It uses **SearchBar** component and a **Flatlist** component do display the search results. The Search Bar is implemented using a **TextInput** component such that when the user enters any characters in the text field, the state of the input field changes, and that triggers a search based on the typed characters. To limit the number of search requests, the function that handles the input update is being debounced using the similarily named method from the *"lodash"* module. 
-  
-<img src="https://media.tenor.com/zrpyKEyxZGwAAAAd/fat-cat-laser-eyes.gif" width="300"/>
-  
-Similarly to the Homepage list items, the search results can also be clicked, revealing the detailed view for that particular result. 
-  
-  ## Navigation
-  
-  The app uses a general **Tab** navigator, and each screen from the tab uses a **Stack** navigator. The tabs function as independent parts of the same app, the results or information displayed on one screen not being affected by changing said screen. 
+#### The Chat Bubbles Area
+This element has a central view which contains all the sent messages. Messages sent by other users are shown on the left side, while messages sent by the current user are displayed on the right side. The messages sent by the current user do not have the username displayed, and for the other messages the username is only shown if the messages belong to different users (the name does not repeat for each message)
 
-<img src="https://media.tenor.com/D0mk5R5x1G8AAAAd/cat-fat-cat.gif" width="300" />
-  
-This is done by having in the App.js component the main *AppNavigation* functional component switching between the Stack navigator, as shown here:
-  
+The following images show how the chat screen looks from the perspective of the four different users in this conversation:
+
+<img src="https://user-images.githubusercontent.com/37547839/202598675-e837a3aa-510c-4a3c-9035-892595d2e013.png" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202598681-3248c909-c621-44b8-b24e-be1b5bbc2651.png" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202598690-1b97377d-29b1-4ee1-a4a0-501dcbae486a.png" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202598696-64697b81-67c9-4fbe-a2b0-4fc3348144e1.png" width="248"/>
+
+Depending on the upload time of the messages, the timestamp is displayed in one of four ways:
+- Full date for messages older than a week
+- Full day name for messages sent during the current week
+- "Yesterday" for messages sent during the previous day
+- "Today" for messages sent during the current day
+
+#### The Text Input Area
+The text input area has three main components:
+- The text input field
+- The **Send** button
+- The **attachment** button
+
+The **Send** is only shown if there is any text inside the input field, and it's appearance is animated using React Reanimated.
+
+<img src="https://user-images.githubusercontent.com/37547839/202601641-6973cc6a-cadd-4026-9486-982bafe72ae3.gif" width="500"/>
+
+The **attachment** button shows upon click a Modal that let's the user to upload a picture either by taking a picture, or by selecting one from the device's photo gallery.
+
+Upon selection, the upload process will begin. Until the picture is uploaded to the server, a local placeholder is shown, and the chat image will have a *pending* status indicator. When the upload is completed, the local placeholder is replaced by the server image with a  corresponding *completed* status indicator (two checkmarks).
+
+The following example shows a user uploading a picture. Note the difference between the locally rendered placeholder, and the moment the picture is uploaded. That is also the moment when the other users see the image in the chat screen.
+
+<img src="https://user-images.githubusercontent.com/37547839/202612830-a2f971d6-14cc-4727-91f9-5c8b4cba9d43.gif" width="1000"/>
+
+### Profile Screen
+The Profile Screen features a minimalist UI, displaying:
+- A user profile picture, or a placeholder if no picture is uploaded
+- The user's name (if it is uploaded), and the e-mail address user for the account
+- A **Contact me** button that will redirect the user to the e-mail app with my contact address filled in
+- A **Source Code** button that will redirect the user to this repo
+- A **Copyright** button that will redirect the user to the License File associated with this project
+
+When the uses taps on the profile picture (or the placeholder) the app will redirect to the editing screen. Here the user can choose a new profile picture, and a new name. The dislplay name field come prefilled with the current name save on the database. If there is no text when the **Save** button is pressed, an alert will pop up, giving the user the following choices:
+- Use the name from the e-mail as display name; this is automatically extracted from the e-mail address using the following bit of code:
+  ```javascript
+  const email = auth.currentUser.email;
+  const extractedName = email.substring(0, email.lastIndexOf('@'));
+  setName(extractedName);
+  ```
+- Set a display name manually; this will close the alert and will let the user to input text in the field again
+
+These features are shown in the following images: 
+
+<img src="https://user-images.githubusercontent.com/37547839/202626592-88f07f45-f7e5-4199-aa05-b15ccb8e234f.png" width="248" /> <img src="https://user-images.githubusercontent.com/37547839/202628506-a9e1d496-f51d-4e70-990f-8a09819b06f3.gif" width="248" /> <img src="https://user-images.githubusercontent.com/37547839/202628516-c084ddd7-d53d-4a08-a2d5-22e253b87317.gif" width="248" />
+
+## Core Mechanics
+
+### Authentication and Navigation Routes
+The authentication process uses [Firebase Auth SDK](https://firebase.google.com/docs/reference/js/v8/firebase.auth). The process is managed by a watcher that will check for any change in the current user state.
+
 ```javascript
-const Tab = createBottomTabNavigator();
-export const AppNavigator = () => (
-<Tab.Navigator 
-/* Tab.Navigator options and styling */
->
-  <Tab.Screen name="Booklist" component={BookListNavigator} />
-  <Tab.Screen name="Search" component={SearchScreenNavigator} />
-</Tab.Navigator>
- );
+const useAuthentication = () => {
+  const [user, setUser] = useState();
+  const [loading, setLoading] = useState(true);
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribeFromAuthStatuChanged = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        setUser(user);
+      } else {
+        // User is signed out
+        setUser(undefined);
+      }
+      setLoading(false);
+    });
+
+    return unsubscribeFromAuthStatuChanged;
+  }, []);
+
+  return {
+    user,
+    loading,
+  };
+};
 ```
-  Each screen has then their own internal navigator:
-  
-  ### Homepage (BookList) 
-  
-  ```javascript
-const Stack = createStackNavigator();
-<Stack.Navigator
-  initialRouteName={Routes.BookListScreen}
-  /* Options */
->
-  <Stack.Screen
-    name={Routes.BookListScreen}
-    component={BookListScreen}
-    /* Options */
-  />
-  <Stack.Screen
-    name={Routes.BookDetailsScreen}
-    component={BookDetails}
-    /* Options */
-  />
-</Stack.Navigator>;
-  ```
-  
-  ### Search
-  
-  ```javascript
-const Stack = createStackNavigator();
-<Stack.Navigator
-  initialRouteName={Routes.SearchScreen}
-  /* Options */
->
-  <Stack.Screen
-    name={Routes.SearchScreen}
-    component={SearchScreen}
-    /* Options */
-  />
-  <Stack.Screen
-    name={Routes.BookDetailsScreen}
-    component={BookDetails}
-    /* Options */
-  />
-</Stack.Navigator>;
-  ```
-  
-## User Experience
-  
-  To make the user experience as seamless as possible, there have been implemented placeholder visual elements to aid the user to better navigate to the wished screen and/or action. Such elements are: 
-  
-  - gradients at list end to suggest scrolling
-  - search file icon to suggest that searching happens in that screen
-  - missing file icons when search returns no result
-  - loading animation when fetching data
-  
-  | Homepage Loading Animation | Element Loading Animation | Search Bar Interaction |
-  | :------------------------: | :-----------------------: | :--------------------: |
-  | <img style="display: block; margin-left: auto; margin-right: auto; width: 250" src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/LoadingBooklist.gif"/> | <img style="display: block; margin-left: auto; margin-right: auto; width: 250" src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/LoadingAnimation.gif"/> | <img style="display: block; margin-left: auto; margin-right: auto; width: 250" src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/SearchBarCloseButton.gif"/> |
-  
+
+This authentication state is constantly monitored, such that the main app navigator shows the appropriate navigation stack to the user:
+- When there is no user currently logged in, the Welcome/Sign In/Sign Up navigation stack is called
+- When there is a user currently logged in, the Profile/Chat navigation stack is called. 
+
+The following ```<RootNavigator>``` handles this process as follows:
+
+```javascript
+const RootNavigation = () => {
+  const { user, loading } = useAuthentication();
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  return user ? <UserStack /> : <AuthStack />;
+};
+```
+
+Furthermore, all user-related data interactions (such as setting/updating names and profile pictures) are also handled by Firebase Auth. Media storage is not included here.
+
+### Real Time Database vs. Storage Bucket
+
+Right now, the storage structure looks like this:
+
+| Storage Bucket Stores | Real Time Database Stores|
+| :------------: | :----------------: |
+| User profile pictures| Users Objects|
+| Message Attachments (Images)| Message Objects|
+
+A user object looks like this: 
+
+```json
+{
+   "_id":"7oikS5AkIQTDAQBlzqbfGSylyKr2",
+   "avatar":"link from Storage Bucket",
+   "name":"Francesca Collin"
+}
+```
+
+A text message object includes a user object and looks like this:
+
+```json
+{
+   "_id":"bb53a94e-aa07-46b4-8d8c-5c0bcab52346",
+   "createdAt":1667128020987,
+   "received":true,
+   "sent":true,
+   "text":"Yeah count me in.",
+   "user":{
+      "_id":"7oikS5AkIQTDAQBlzqbfGSylyKr2",
+      "avatar":"link from Storage Bucket",
+      "name":"Francesca Collin"
+   }
+}
+```
+
+A simple image sent in chat looks like this:
+
+```json
+{
+   "_id":"7cab2a4d-0f6a-4ead-851d-0fa6216ff499",
+   "createdAt":1668437501234,
+   "image":"link from Storage Bucket",
+   "received":true,
+   "sent":true,
+   "user":{
+      "_id":"ZdpStKCsKbUyhpo4wpWuQdohZCD2",
+      "avatar":"another link from Storage Bucked",
+      "name":"Beatriz Bridges"
+   }
+}
+```
+
+Firebase Real Time Database is the main DB that will store all the messages and users, keeping track of their respective IDs.
+Storage Bucket is simply a server space where all media is dumped. Where each piece of media belongs is handled by the Real Time Database.
+
+
 ## Further improvements
   
-### Sharing and *deep links*
+### Error handling with Firebase
   
-Right now the app only manages hyperlinks from within the app to the outside world. It would be a great thing to implement a share button that cand generate a *deep link* that would enable the person that has been sent a particular book link to open the app and automaticallt navigate to said book
+Currently there are some basic error check being made, such as those for incorrect credentials or file upload, but they can be further improved by displaying the errors in a formatted way, filtering the error codes. Furthermore, ways to correct these errors could be implemented (such as prompts to reupload media, or resend messages).
 
-### Caching fetched data
+### Support for more attachment types
  
-Currently, every time data is needed a *fetch()* is called. During the app development I discovered that the NY Times API recommends a sleep period of 6 seconds beteween calls to ensure that the request quota per 60 seconds is not exceeded. Although the input text handler function is debounced using lodash.debounce, there still are occasions where the app becomes unresponsivness due to the server refusing to answer requests. A method for caching the fetched data and only refreshing it on manual refresh gesture and app restart neets to be implemented. This way the search field can also be sped up, thus providing a more fluid user experience.
+Right now only pictures can be sent via chat. Voice memos and videos would a at least two additions to the list, bringing this project closer to real-world implementations.
+
+### Separate chatrooms
+
+At the moment, the app only supports a single groupchat. Because the entire app is built around user IDs and message IDs, it could be fairly easy to implement a separate chat functionality.
 
 ## Conclusions
 
-As my first React Native project, the learning curve was steep. Altough many steps along the way proved to be fairly intuitive, the development process has not taken place without certain insecure moments. Following this project I am planning to work more to further increase the depth of my knowledge in the following areas of interest: 
- - Passing data from one component to another using *Props*
- - Component *State* and proper component lifecycle management (*useRef, useState, useEffect, useCallback*) 
- - File structure and naming convention
- - Separating function from interface; logic should not be done in visual components
+As my second React Native project, during the development process I started to understand the core concepts of React with more ease. The biggest realisation was how trully flexible the development process is when one is working with well-made libraries and modules that are made to be built upon. I am confident that this new approach to coding, especially to writing reactive code only represents the beginning. Still, moving forward I am actively seeking to improve on the following:
+ - File versioning with *Github* (separate, feature-based branches that are merged after a review process)
+ - Building more reusable components from the get go
+ - Proper state management, as components are starting to increase in complexity (Context API and Hooks, Redux, etc)
   
   
 
@@ -187,12 +275,13 @@ As my first React Native project, the learning curve was steep. Altough many ste
    [ReactNative]: <https://reactnative.dev/>
    [Watchman]: <https://facebook.github.io/watchman/>
 
-   [expo-app-loading]: <https://docs.expo.dev/versions/latest/sdk/app-loading/>
-   [expo-font]: <https://docs.expo.dev/versions/latest/sdk/font/>
-   [expo-linear-gradient]: <https://docs.expo.dev/versions/latest/sdk/linear-gradient/>
-   [react-navigation]: <https://reactnavigation.org/docs/getting-started/>
+   [expo-splash-screen]: <https://docs.expo.dev/versions/latest/sdk/splash-screen/>
+   [expo-image-picker]: <https://docs.expo.dev/versions/latest/sdk/imagepicker/>
+   [firebase]: <https://firebase.google.com/docs/reference/>
+   [lottie-react-native]: <https://github.com/lottie-react-native/lottie-react-native>
+   [lottie-ios]: <https://github.com/airbnb/lottie-ios>
+   [moment]: <https://github.com/moment/moment/>
+   [react-native-gifted-chat]: <https://github.com/FaridSafi/react-native-gifted-chat>
+   [react-native-reanimated]: <https://github.com/software-mansion/react-native-reanimated>
    
-   [Booklist]: <https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/Booklist.gif>
-   [Booklist2BookDetailsScreen]: <https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/Booklist2BookDetailsScreen.gif>
-   [BuyLinks]: <https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/BuyLinks.gif>
-   [Search]: <https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/Search.gif>
+   
