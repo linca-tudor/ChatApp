@@ -70,11 +70,11 @@ Instructions on how to use them in your own application are linked below.
 
 Unless there is an existend logged in user, this is the screen the app will display. It contains links to the Sign Up and Sign In screens. The **Password** field also features a hide text toggle button.
 
-<img src="https://user-images.githubusercontent.com/37547839/202610885-b4213eaa-b6a2-4c67-9f05-fb87687fdf21.png" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202615181-2fb2369c-b123-48c9-be7a-28ecd3e5ae69.gif" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202620069-8c78e13d-df8c-40fc-a10a-76edd9aab0e7.gif" width="248"/>
+<img src="https://user-images.githubusercontent.com/37547839/202610885-b4213eaa-b6a2-4c67-9f05-fb87687fdf21.png" width="250"/> <img src="https://user-images.githubusercontent.com/37547839/202615181-2fb2369c-b123-48c9-be7a-28ecd3e5ae69.gif" width="250"/> <img src="https://user-images.githubusercontent.com/37547839/202620069-8c78e13d-df8c-40fc-a10a-76edd9aab0e7.gif" width="250"/>
 
 From the Sign In screen it is also possible to opt for an account **passowrd reset**. It can be done as shown below, and a sample response from the server can be also seen below. The link will redirect the user to a webpage hosted by Firebase where the password can be reset.
 
-<img src="https://user-images.githubusercontent.com/37547839/202615631-2f57b470-4127-4e42-9e00-aff459cfe1da.gif" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202617481-04853bd4-0453-4cbb-a5a8-15bd72f5bd8e.png" width="752"/> 
+<img src="https://user-images.githubusercontent.com/37547839/202615631-2f57b470-4127-4e42-9e00-aff459cfe1da.gif" width="204"/> <img src="https://user-images.githubusercontent.com/37547839/202617481-04853bd4-0453-4cbb-a5a8-15bd72f5bd8e.png" width="618"/> 
 
 
 ### Chat Screen
@@ -86,7 +86,7 @@ This element has a central view which contains all the sent messages. Messages s
 
 The following images show how the chat screen looks from the perspective of the four different users in this conversation:
 
-<img src="https://user-images.githubusercontent.com/37547839/202598675-e837a3aa-510c-4a3c-9035-892595d2e013.png" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202598681-3248c909-c621-44b8-b24e-be1b5bbc2651.png" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202598690-1b97377d-29b1-4ee1-a4a0-501dcbae486a.png" width="248"/> <img src="https://user-images.githubusercontent.com/37547839/202598696-64697b81-67c9-4fbe-a2b0-4fc3348144e1.png" width="248"/>
+<img src="https://user-images.githubusercontent.com/37547839/202598675-e837a3aa-510c-4a3c-9035-892595d2e013.png" width="204"/> <img src="https://user-images.githubusercontent.com/37547839/202598681-3248c909-c621-44b8-b24e-be1b5bbc2651.png" width="204"/> <img src="https://user-images.githubusercontent.com/37547839/202598690-1b97377d-29b1-4ee1-a4a0-501dcbae486a.png" width="204"/> <img src="https://user-images.githubusercontent.com/37547839/202598696-64697b81-67c9-4fbe-a2b0-4fc3348144e1.png" width="204"/>
 
 Depending on the upload time of the messages, the timestamp is displayed in one of four ways:
 - Full date for messages older than a week
@@ -131,7 +131,7 @@ When the uses taps on the profile picture (or the placeholder) the app will redi
 
 These features are shown in the following images: 
 
-<img src="https://user-images.githubusercontent.com/37547839/202626592-88f07f45-f7e5-4199-aa05-b15ccb8e234f.png" width="248" /> <img src="https://user-images.githubusercontent.com/37547839/202628506-a9e1d496-f51d-4e70-990f-8a09819b06f3.gif" width="248" /> <img src="https://user-images.githubusercontent.com/37547839/202628516-c084ddd7-d53d-4a08-a2d5-22e253b87317.gif" width="248" />
+<img src="https://user-images.githubusercontent.com/37547839/202626592-88f07f45-f7e5-4199-aa05-b15ccb8e234f.png" width="250" /> <img src="https://user-images.githubusercontent.com/37547839/202628506-a9e1d496-f51d-4e70-990f-8a09819b06f3.gif" width="250" /> <img src="https://user-images.githubusercontent.com/37547839/202628516-c084ddd7-d53d-4a08-a2d5-22e253b87317.gif" width="250" />
 
 ## Core Mechanics
 
