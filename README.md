@@ -74,7 +74,7 @@ Unless there is an existend logged in user, this is the screen the app will disp
 
 From the Sign In screen it is also possible to opt for an account **passowrd reset**. It can be done as shown below, and a sample response from the server can be also seen below. The link will redirect the user to a webpage hosted by Firebase where the password can be reset.
 
-<img src="https://user-images.githubusercontent.com/37547839/202615631-2f57b470-4127-4e42-9e00-aff459cfe1da.gif" width="206"/> <img src="https://user-images.githubusercontent.com/37547839/202617481-04853bd4-0453-4cbb-a5a8-15bd72f5bd8e.png" width="624"/> 
+<img src="https://user-images.githubusercontent.com/37547839/202615631-2f57b470-4127-4e42-9e00-aff459cfe1da.gif" width="205"/> <img src="https://user-images.githubusercontent.com/37547839/202617481-04853bd4-0453-4cbb-a5a8-15bd72f5bd8e.png" width="621"/> 
 
 
 ### Chat Screen
